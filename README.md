@@ -1,17 +1,15 @@
 # CSC-365 fullstack app
 
-*** Will be deployed soon ***
+*** IN DEVELOPMENT ***
 
 ## Overview
+  This project is the extention of the [CSC-365-fullstack-app](https://github.com/lgad31vn/CSC-365-fullstack-app).
+  
   This is a full-stack web application that works like a *search engine* which will find the similar and relevant businesses (in a json dataset from Yelp) based on user's inputs using Cosine Similarity Metric. 
   
-### Project Showcase
-
-https://user-images.githubusercontent.com/66233296/155579965-f9aaa7d7-7820-4018-808b-f5c8eec24f3a.mov
 
 
-## Technologies used:
-
+## Technologies:
 ### Backend -- Engine
   - Java Springboot
   - Customized HashTable
