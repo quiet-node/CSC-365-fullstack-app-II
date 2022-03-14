@@ -59,31 +59,6 @@ public class BusinessController {
         return similarBs;
     }
 
-    @GetMapping("/")
-    public List<BusinessModel> sortedBs(@PathVariable String businessName) {
-        // init cosSim
-        CosSim cosSim = new CosSim();
-
-        // allBs:List<BusinessModel> => List of all businesses
-        List<BusinessModel> allBs = repo.findAll();
-
-        // similarBs:List<BusinessModel> => List of similar businesses
-        List<BusinessModel> similarBs = new ArrayList<BusinessModel>();
-
-        //targetB:BusinessModel => the business associate with the name passed in the url
-        BusinessModel targetB = repo.findByName(businessName).get(0);
-
-        //  loop through b to calculate cosSim
-        for (BusinessModel b : allBs) {
-            double cosSimRate = cosSim.calcSimRate(targetB, b);
-            b.setSimilarityRate(cosSimRate);  
-                if (b.getSimilarityRate() >= 0.65 && b.getSimilarityRate() <= 1) {
-                           similarBs.add(b);
-                }
-        }
-        return similarBs;
-
-    }
 
     
 }

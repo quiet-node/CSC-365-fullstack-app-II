@@ -2,13 +2,10 @@ package yelp.dataset.oswego.yelpbackend.models;
 
 import java.util.ArrayList;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Columns;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

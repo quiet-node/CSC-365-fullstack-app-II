@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import yelp.dataset.oswego.yelpbackend.hashing.HashTable;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 
@@ -24,12 +23,7 @@ public class JsonParser implements CommandLineRunner{
     ArrayList<BusinessModel> businessList = new ArrayList<>();
 
     @Override
-    public void run(String... args) throws Exception {
-        // jsonParser();
-        // Testing();
-        // businessRepository.findAll();
-
-    }
+    public void run(String... args) throws Exception {}
 
     public void jsonParser() {
         try {
@@ -78,7 +72,6 @@ public class JsonParser implements CommandLineRunner{
                 // businessRepository.save(bModel);
 
             }
-            // Testing(businessList);
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
