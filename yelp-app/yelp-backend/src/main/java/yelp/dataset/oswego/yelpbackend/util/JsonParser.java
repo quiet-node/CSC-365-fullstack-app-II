@@ -14,16 +14,13 @@ import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 
 @Component // this + CommandLineRunner are used to run code at application startup
             // like useEffect in React
-public class JsonParser implements CommandLineRunner{
+public class JsonParser {
 
 
     @Autowired
     private BusinessRepository businessRepository; // repo to store data
 
     ArrayList<BusinessModel> businessList = new ArrayList<>();
-
-    @Override
-    public void run(String... args) throws Exception {}
 
     public void jsonParser() {
         try {
