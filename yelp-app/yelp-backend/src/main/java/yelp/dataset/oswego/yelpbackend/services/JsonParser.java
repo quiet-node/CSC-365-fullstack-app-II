@@ -1,4 +1,4 @@
-package yelp.dataset.oswego.yelpbackend.util;
+package yelp.dataset.oswego.yelpbackend.services;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,14 +6,12 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 
-@Component // this + CommandLineRunner are used to run code at application startup
-            // like useEffect in React
+@Component // this + CommandLineRunner are used to run code at application startup -like useEffect in React
 public class JsonParser {
 
 
