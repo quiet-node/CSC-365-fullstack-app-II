@@ -48,6 +48,7 @@ public class BusinessBtree implements Serializable{
         } else { // tree is not empty
             // If root is full, then tree grows in height
             if (root.BKeyNum == (2 * minDeg - 1)) {
+                
                 // init new root
                 BusinessBNode newRoot = new BusinessBNode(minDeg, false);
 
@@ -61,10 +62,13 @@ public class BusinessBtree implements Serializable{
                 int index = 0;
                 if (newRoot.BKeys[0] < key) 
                     index++; 
-                newRoot.BChild[index].addToNonFullNode(key);
+                newRoot.BChild[index].addKey(key);
 
                 // change root for the whole tree
                 root = newRoot;
+            }
+            else { // if root is not full, addKey key
+                root.addKey(key);
             }
         }
     }

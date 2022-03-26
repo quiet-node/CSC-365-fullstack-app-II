@@ -22,13 +22,14 @@ public class BusinessBNode {
 
     // A function to traverse all nodes in a subtree rooted with this node
     protected void traverse() {
- 
+        
         // There are n keys and n+1 children, traverse through n keys and first n children
         int i = 0;
         for (i = 0; i < this.BKeyNum; i++) {
- 
+            
             // If this is not leaf, then before printing BKey[i], traverse the subtree rooted with child BChild[i].
             if (!this.BIsLeaf) BChild[i].traverse();
+            
             System.out.print(BKeys[i] + " ");
         }
  
@@ -58,8 +59,8 @@ public class BusinessBNode {
     }
 
     // ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    // A util function to add a new key to a non-full node
-    protected void addToNonFullNode(int key) {
+    // add a new key to a non-full node
+    protected void addKey(int key) {
 
         // Init tail
         int tail = BKeyNum - 1;
@@ -90,15 +91,55 @@ public class BusinessBNode {
                 // find the appropriate child to add the new key
                 if (BKeys[tail+1] < key) tail++;
             }
-            BChild[tail+1].addToNonFullNode(key);
+            BChild[tail+1].addKey(key);
         }
 
     }
 
     // ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    // A util function to split the child newNode => newNode must be full to split
-    protected void splitChild(int i, BusinessBNode splitedNode) {
+    // split the child newNode => newNode must be full to split
+    protected void splitChild(int pos, BusinessBNode splittedNode) {
+
+        // create a new node to store (t-1) keys of splittedNode
+        BusinessBNode newNode = new BusinessBNode(splittedNode.BMinDeg, splittedNode.BIsLeaf);
+        newNode.BKeyNum = BMinDeg - 1;
         
+        // copy the last (BMinDeg - 1) "keys" of splittedNode to newNode
+        for (int i = 0; i < BMinDeg - 1; i++) {
+            newNode.BKeys[i] = splittedNode.BKeys[i+BMinDeg];
+            splittedNode.BKeys[i+BMinDeg] = 0;
+        }
+
+        // copy the last BMinDeg "children" of splittedNode to newNode
+        if (!splittedNode.BIsLeaf) {
+            for (int i = 0; i < BMinDeg; i++) {
+                newNode.BChild[i] = splittedNode.BChild[i+BMinDeg];
+            }
+        }
+
+        // reduce the number of keys in splittedNode
+        splittedNode.BKeyNum = BMinDeg - 1;        
+        
+        // create new space for new child in this node
+        for (int i = BKeyNum; i >= pos + 1; i --) {
+            BChild[i+1] = BChild[i];
+        }
+        
+        // link the new child to newNode
+        BChild[pos+1] = newNode;
+
+        // move a key from splittedNode to newNode. Find the location of new key and move all greater keys one space ahead
+        for (int i =  BKeyNum - 1;i >= pos; i--) {
+            BKeys[i+1] = BKeys[i];
+        }
+
+        // copy the middle key of splittedNode to newNode
+        BKeys[pos] = splittedNode.BKeys[BMinDeg-1];
+        splittedNode.BKeys[BMinDeg-1] = 0;
+
+        // increment BKeyNum
+        BKeyNum += 1;
+
     }
     
 }

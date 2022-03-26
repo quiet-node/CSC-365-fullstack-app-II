@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 
-@Component // this + CommandLineRunner are used to run code at application startup -like useEffect in React
 public class JsonParser {
-
 
     @Autowired
     private BusinessRepository businessRepository; // repo to store data
