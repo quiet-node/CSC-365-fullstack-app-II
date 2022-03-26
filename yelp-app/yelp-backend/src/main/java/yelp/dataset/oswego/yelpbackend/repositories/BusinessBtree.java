@@ -3,6 +3,7 @@ package yelp.dataset.oswego.yelpbackend.repositories;
 import java.io.Serializable;
 
 import lombok.Getter;
+import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @Getter
 public class BusinessBtree implements Serializable{
@@ -12,10 +13,8 @@ public class BusinessBtree implements Serializable{
     *   - java.io.Serializable does such job
     */
 
-    private static final int M = 4; // max childrend per B-tree node = M - 1 
-    private int nodeCounts; //  number of BNodes 
     private BusinessBNode root;
-    private int minDeg;
+    private int minDeg; 
 
     public BusinessBtree(int minDeg) {
         this.root = null;
@@ -30,16 +29,18 @@ public class BusinessBtree implements Serializable{
     }
 
     // function to search a key 
-    public BusinessBNode search(int key) {
+    public BusinessBNode search(BusinessModel key) {
         if (this.root == null)
             return null;
         else
             return this.root.search(key);
     }
 
-    // ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    // The main function that inserts a new key 
-    public void insert(int key) {
+    /* 
+    * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+    * Inserts a new key to BusinessBTree
+    */
+    public void insert(BusinessModel key) {
         if (root == null) { // if tree is empty
             // init new root
             root = new BusinessBNode(this.minDeg, true);
@@ -60,7 +61,7 @@ public class BusinessBtree implements Serializable{
 
                 // New root has two children now. Decide which of the two children is going to have new key
                 int index = 0;
-                if (newRoot.BKeys[0] < key) 
+                if (newRoot.BKeys[0].hashCode() < key.hashCode()) 
                     index++; 
                 newRoot.BChild[index].addKey(key);
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
@@ -22,13 +21,13 @@ public class JsonParser {
         try {
             // businessRepository.deleteAllInBatch();
             // buffrer reader to read lines in json file
-            FileReader reader = new FileReader("YOUR FILE PATH");
+            FileReader reader = new FileReader("/Users/logan/coding/SUNY_Oswego/CSC-365/In_Class/Assignment2/yelp-app/yelp-dataset/businessSmall.json");
             BufferedReader br = new BufferedReader(reader);
             String line = "";
 
 
             // loop through the json file
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 10; i++) {
                 // each line of the file is a json object
                 line = br.readLine();
 

@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Table(name="yelp")
 public class BusinessModel implements Comparable<BusinessModel> {
     @Id
-    @GeneratedValue
     private long id; // primary key
 
     String  business_id, name, address;

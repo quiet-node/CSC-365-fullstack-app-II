@@ -15,13 +15,14 @@ public class CosSim {
     private double cosSimRate;
     
     
-    // catFilter:string => filter out the "&" and " "
-    // For example:
-    //      catA = ["Gastropubs"," Food"," Beer Gardens"," Restaurants"," Bars"," American (Traditional)"," Beer Bar"," Nightlife"," Breweries"]
-    //      catB = [Restaurant, Beauty & Spa,  Coffee & Tea, Hair Salons, Food]
-
-    // Then catFilter return a HashSet
-    //      vector =  [American, Store, Gardens, Coffee, Restaurants, Beer, Nightlife, Gastropubs, Tea, Convenience, Bar, Breweries, (Traditional), Food, Bars]      
+    /* 
+    * catFilter:string => filter out the "&" and " "
+    * For example:
+    *      catA = ["Gastropubs"," Food"," Beer Gardens"," Restaurants"," Bars"," American (Traditional)"," Beer Bar"," Nightlife"," Breweries"]
+    *      catB = [Restaurant, Beauty & Spa,  Coffee & Tea, Hair Salons, Food]
+    * Then catFilter return a HashSet
+    *      vector =  [American, Store, Gardens, Coffee, Restaurants, Beer, Nightlife, Gastropubs, Tea, Convenience, Bar, Breweries, (Traditional), Food, Bars]      
+    */
 
     private HashSet<String> catFilter(ArrayList<String> catA, ArrayList<String> catB) {
 
@@ -151,8 +152,10 @@ public class CosSim {
 
     // calculate simRate 
     public double calcSimRate(BusinessModel businessA, BusinessModel businessB) {
-        // Cos(X, Y) = (X.Y) / (||X|| * ||Y||)
-        // Pseudo: simRate = Cos(X,Y) = (dotProduct) / (Magnitude vector X * Magnitude vector Y)
+        /* 
+        * Cos(X, Y) = (X.Y) / (||X|| * ||Y||)
+        * Pseudo: simRate = Cos(X,Y) = (dotProduct) / (Magnitude vector X * Magnitude vector Y)
+        */
 
         ArrayList<String> catA = businessA.getCategories();
         ArrayList<String> catB = businessB.getCategories();

@@ -1,11 +1,12 @@
 package yelp.dataset.oswego.yelpbackend.repositories;
 
 import lombok.Data;
+import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @Data
 public class BusinessBNode {
     // private BusinessModel[] BKeys;  // Array of business key
-    protected int[] BKeys;  // Array of business key
+    protected BusinessModel[] BKeys;  // Array of business key
     protected BusinessBNode[] BChild;  // Array of business children
     protected int BMinDeg; // Minimum degree (defines the range for number of keys)
     protected int BKeyNum; // number of business keys
@@ -14,7 +15,7 @@ public class BusinessBNode {
     public BusinessBNode(int BMinDeg, boolean BIsLeaf) {
         this.BMinDeg = BMinDeg;
         this.BIsLeaf = BIsLeaf;
-        this.BKeys = new int[2 * BMinDeg - 1];
+        this.BKeys = new BusinessModel[2 * BMinDeg - 1];
         this.BChild = new BusinessBNode[2 * BMinDeg];
         this.BKeyNum = 0;
     }
@@ -39,15 +40,15 @@ public class BusinessBNode {
     }
 
     // A function to search a key in the subtree rooted with this node.
-    protected BusinessBNode search(int key) { // returns NULL if k is not present.
+    protected BusinessBNode search(BusinessModel key) { // returns NULL if k is not present.
  
         // Find the first key greater than or equal to k
         int i = 0;
-        while (i < this.BKeyNum && key > BKeys[i])
+        while (i < this.BKeyNum && key.hashCode() > BKeys[i].hashCode())
             i++;
  
         // If the found key is equal to k, return this node
-        if (BKeys[i] == key)
+        if (BKeys[i].hashCode() == key.hashCode())
             return this;
  
         // If the key is not found here and this is a leaf node => null
@@ -58,9 +59,11 @@ public class BusinessBNode {
  
     }
 
-    // ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    // add a new key to a non-full node
-    protected void addKey(int key) {
+    /*  
+    *   ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+    *   add a new key to a non-full node 
+    */
+    protected void addKey(BusinessModel key) {
 
         // Init tail
         int tail = BKeyNum - 1;
@@ -68,7 +71,7 @@ public class BusinessBNode {
         // if this is a leaf node
         if (BIsLeaf) {
             // find the appropriate location of the new key 
-            while (tail >= 0 && BKeys[tail] > key) {
+            while (tail >= 0 && BKeys[tail].hashCode() > key.hashCode()) {
                 BKeys[tail+1] = BKeys[tail]; // move all greater keys to one place ahead to make room for new key
                 tail--;
             }
@@ -79,25 +82,29 @@ public class BusinessBNode {
         } else { // if this node is not a leaf
             
             // first find the appropriate child for the new key
-            while (tail >= 0 && BKeys[tail] > key) tail--;
+            while (tail >= 0 && BKeys[tail].hashCode() > key.hashCode()) tail--;
             
             if (BChild[tail+1].BKeyNum == (2 * BMinDeg -1)) { // if the child is full
 
                 // split the child if full
                 splitChild(tail+1, BChild[tail+1]);
 
-                // After split, the middle key of BChild[tail] goes up to the node above
-                // Bchild[tail] is splitted into two children
-                // find the appropriate child to add the new key
-                if (BKeys[tail+1] < key) tail++;
+                /* 
+                * After split, the middle key of BChild[tail] goes up to the node above
+                * Bchild[tail] is splitted into two children
+                * find the appropriate child to add the new key
+                */
+                if (BKeys[tail+1].hashCode() < key.hashCode()) tail++;
             }
             BChild[tail+1].addKey(key);
         }
 
     }
 
-    // ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    // split the child newNode => newNode must be full to split
+    /* 
+    * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+    * split the child newNode => newNode must be full to split
+    */
     protected void splitChild(int pos, BusinessBNode splittedNode) {
 
         // create a new node to store (t-1) keys of splittedNode
@@ -107,7 +114,7 @@ public class BusinessBNode {
         // copy the last (BMinDeg - 1) "keys" of splittedNode to newNode
         for (int i = 0; i < BMinDeg - 1; i++) {
             newNode.BKeys[i] = splittedNode.BKeys[i+BMinDeg];
-            splittedNode.BKeys[i+BMinDeg] = 0;
+            splittedNode.BKeys[i+BMinDeg] = null;
         }
 
         // copy the last BMinDeg "children" of splittedNode to newNode
@@ -135,7 +142,7 @@ public class BusinessBNode {
 
         // copy the middle key of splittedNode to newNode
         BKeys[pos] = splittedNode.BKeys[BMinDeg-1];
-        splittedNode.BKeys[BMinDeg-1] = 0;
+        splittedNode.BKeys[BMinDeg-1] = null;
 
         // increment BKeyNum
         BKeyNum += 1;
