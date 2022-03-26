@@ -1,4 +1,4 @@
-package yelp.dataset.oswego.yelpbackend.hashing;
+package yelp.dataset.oswego.yelpbackend.algorithms.hashing;
 
 import java.util.HashMap;
 import java.util.LinkedList;

@@ -5,33 +5,29 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import yelp.dataset.oswego.yelpbackend.algorithms.btree.BusinessBtree;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
-import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 
 public class JsonParser {
 
-    @Autowired
-    private BusinessRepository businessRepository; // repo to store data
+    BusinessBtree businessBtree = new BusinessBtree(8);
 
-    ArrayList<BusinessModel> businessList = new ArrayList<>();
-
-    public void jsonParser() {
+    public BusinessBtree jsonParser(String PATH) {
         try {
-            // businessRepository.deleteAllInBatch();
             // buffrer reader to read lines in json file
-            FileReader reader = new FileReader("/Users/logan/coding/SUNY_Oswego/CSC-365/In_Class/Assignment2/yelp-app/yelp-dataset/businessSmall.json");
+            FileReader reader = new FileReader(PATH);
             BufferedReader br = new BufferedReader(reader);
             String line = "";
 
 
             // loop through the json file
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10000; i++) {
                 // each line of the file is a json object
                 line = br.readLine();
 
-                JSONObject bData = new JSONObject(line); // this is the whole Object for the whole line
+                // JSONify the whole line
+                JSONObject bData = new JSONObject(line); 
                 
                 // attributes
                 String name = bData.get("name").toString();
@@ -54,20 +50,17 @@ public class JsonParser {
                 }
 
                 // a BusinessModel instance
-                BusinessModel bModel = new BusinessModel(0, business_id, name, address, stars, reviews, similarityRate, bCategories);
-            
-                bModel.setCategories(bCategories);
-
-                businessList.add(bModel);
-
-                // write to MySql;
-                // businessRepository.save(bModel);
+                BusinessModel bModel = new BusinessModel(i, business_id, name, address, stars, reviews, similarityRate, bCategories);
+                // bModel.setCategories(bCategories);
+                businessBtree.insert(bModel);
 
             }
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+        return businessBtree;
     }
     
 }

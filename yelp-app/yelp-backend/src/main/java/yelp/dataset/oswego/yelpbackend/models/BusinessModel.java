@@ -12,13 +12,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data //setters, getters, toString, hashcode
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="yelp")
 public class BusinessModel implements Comparable<BusinessModel> {
     @Id
-    private long id; // primary key
+    private long id;
 
     String  business_id, name, address;
     double stars, reviews;

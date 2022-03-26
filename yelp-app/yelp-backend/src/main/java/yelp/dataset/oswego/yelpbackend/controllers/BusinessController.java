@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
-import yelp.dataset.oswego.yelpbackend.similarity.CosSim;
 
 @RestController
 @RequestMapping("/yelpdata")
@@ -22,7 +22,7 @@ public class BusinessController {
     @Autowired
     private BusinessRepository repo; // repo to store data
 
-    @GetMapping("/allbusinesses")
+    @GetMapping("/get-all-businesses")
     public List<BusinessModel> getAllBusinesses() {
         return repo.findAll();
     }

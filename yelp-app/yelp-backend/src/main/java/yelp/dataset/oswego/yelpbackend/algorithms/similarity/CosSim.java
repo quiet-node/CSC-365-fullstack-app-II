@@ -1,11 +1,11 @@
-package yelp.dataset.oswego.yelpbackend.similarity;
+package yelp.dataset.oswego.yelpbackend.algorithms.similarity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 import lombok.NoArgsConstructor;
-import yelp.dataset.oswego.yelpbackend.hashing.HashTable;
+import yelp.dataset.oswego.yelpbackend.algorithms.hashing.HashTable;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @NoArgsConstructor

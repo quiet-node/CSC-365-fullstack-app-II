@@ -1,4 +1,4 @@
-package yelp.dataset.oswego.yelpbackend.repositories;
+package yelp.dataset.oswego.yelpbackend.algorithms.btree;
 
 import lombok.Data;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
