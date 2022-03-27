@@ -61,7 +61,7 @@ public class BusinessBtree implements Serializable{
 
                 // New root has two children now. Decide which of the two children is going to have new key
                 int index = 0;
-                if (newRoot.BKeys[0].hashCode() < key.hashCode()) 
+                if (newRoot.BKeys[0].getId() < key.getId()) 
                     index++; 
                 newRoot.BChild[index].addKey(key);
 

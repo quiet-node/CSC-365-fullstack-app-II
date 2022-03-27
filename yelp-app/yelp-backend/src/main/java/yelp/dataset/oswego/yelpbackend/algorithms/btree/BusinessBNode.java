@@ -1,10 +1,12 @@
 package yelp.dataset.oswego.yelpbackend.algorithms.btree;
 
+import java.io.Serializable;
+
 import lombok.Data;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @Data
-public class BusinessBNode {
+public class BusinessBNode implements Serializable{
     // private BusinessModel[] BKeys;  // Array of business key
     protected BusinessModel[] BKeys;  // Array of business key
     protected BusinessBNode[] BChild;  // Array of business children
@@ -44,11 +46,11 @@ public class BusinessBNode {
  
         // Find the first key greater than or equal to k
         int i = 0;
-        while (i < this.BKeyNum && key.hashCode() > BKeys[i].hashCode())
+        while (i < this.BKeyNum && key.getId() > BKeys[i].getId())
             i++;
  
         // If the found key is equal to k, return this node
-        if (BKeys[i].hashCode() == key.hashCode())
+        if (BKeys[i].getId() == key.getId())
             return this;
  
         // If the key is not found here and this is a leaf node => null
@@ -71,7 +73,7 @@ public class BusinessBNode {
         // if this is a leaf node
         if (BIsLeaf) {
             // find the appropriate location of the new key 
-            while (tail >= 0 && BKeys[tail].hashCode() > key.hashCode()) {
+            while (tail >= 0 && BKeys[tail].getId() > key.getId()) {
                 BKeys[tail+1] = BKeys[tail]; // move all greater keys to one place ahead to make room for new key
                 tail--;
             }
@@ -82,7 +84,7 @@ public class BusinessBNode {
         } else { // if this node is not a leaf
             
             // first find the appropriate child for the new key
-            while (tail >= 0 && BKeys[tail].hashCode() > key.hashCode()) tail--;
+            while (tail >= 0 && BKeys[tail].getId() > key.getId()) tail--;
             
             if (BChild[tail+1].BKeyNum == (2 * BMinDeg -1)) { // if the child is full
 
@@ -94,7 +96,7 @@ public class BusinessBNode {
                 * Bchild[tail] is splitted into two children
                 * find the appropriate child to add the new key
                 */
-                if (BKeys[tail+1].hashCode() < key.hashCode()) tail++;
+                if (BKeys[tail+1].getId() < key.getId()) tail++;
             }
             BChild[tail+1].addKey(key);
         }

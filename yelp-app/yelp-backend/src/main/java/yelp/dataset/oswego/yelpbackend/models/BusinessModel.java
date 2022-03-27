@@ -1,9 +1,9 @@
 package yelp.dataset.oswego.yelpbackend.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,25 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="yelp")
-public class BusinessModel implements Comparable<BusinessModel> {
+public class BusinessModel implements Serializable {
     @Id
     private long id;
+    private String  business_id, name, address;
+    private double stars, reviews, similarityRate;
+    private ArrayList<String> categories;
 
-    String  business_id, name, address;
-    double stars, reviews;
-    
-    double similarityRate;
-
-    ArrayList<String> categories;
-
-    @Override
     public int compareTo(BusinessModel b) {
-        
         return Double.compare(this.getSimilarityRate(), b.similarityRate);
-        
     }
-
-
-
-    
 }

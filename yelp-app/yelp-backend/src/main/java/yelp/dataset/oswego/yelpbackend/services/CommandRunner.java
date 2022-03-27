@@ -11,8 +11,8 @@ public class CommandRunner implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        BusinessBtree bTree = new JsonParser().jsonParser("/Users/logan/coding/SUNY_Oswego/CSC-365/In_Class/Assignment2/yelp-app/yelp-dataset/business.json");
-        // System.out.println(bTree.getRoot());
+        BusinessBtree businessBtree = new IOUtil().readBtree();
+        businessBtree.traverse();
     }
 }
 

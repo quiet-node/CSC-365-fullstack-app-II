@@ -11,7 +11,8 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 public class JsonParser {
 
-    BusinessBtree businessBtree = new BusinessBtree(8);
+    BusinessBtree businessBtree = new BusinessBtree(64);
+    ArrayList<BusinessModel> businessList = new ArrayList<>();
 
     public BusinessBtree jsonParser(String PATH) {
         try {
@@ -26,8 +27,7 @@ public class JsonParser {
                 // each line of the file is a json object
                 line = br.readLine();
 
-                // JSONify the whole line
-                JSONObject bData = new JSONObject(line); 
+                JSONObject bData = new JSONObject(line); // this is the whole Object for the whole line
                 
                 // attributes
                 String name = bData.get("name").toString();
@@ -51,7 +51,9 @@ public class JsonParser {
 
                 // a BusinessModel instance
                 BusinessModel bModel = new BusinessModel(i, business_id, name, address, stars, reviews, similarityRate, bCategories);
-                // bModel.setCategories(bCategories);
+            
+                businessList.add(bModel);
+
                 businessBtree.insert(bModel);
 
             }
