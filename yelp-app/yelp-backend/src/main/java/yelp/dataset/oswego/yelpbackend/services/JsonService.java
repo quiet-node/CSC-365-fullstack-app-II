@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
-import yelp.dataset.oswego.yelpbackend.algorithms.btree.BusinessBtree;
+import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 public class JsonService {

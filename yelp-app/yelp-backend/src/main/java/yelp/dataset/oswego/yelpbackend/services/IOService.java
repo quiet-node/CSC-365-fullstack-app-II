@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import lombok.NoArgsConstructor;
-import yelp.dataset.oswego.yelpbackend.algorithms.btree.BusinessBtree;
+import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
 
 @NoArgsConstructor
 public class IOService {

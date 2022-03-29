@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import lombok.NoArgsConstructor;
-import yelp.dataset.oswego.yelpbackend.algorithms.hashing.HashTable;
+import yelp.dataset.oswego.yelpbackend.dataStructure.hashTable.HashTable;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @NoArgsConstructor

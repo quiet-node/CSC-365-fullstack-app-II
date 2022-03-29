@@ -3,7 +3,8 @@ package yelp.dataset.oswego.yelpbackend.services;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import yelp.dataset.oswego.yelpbackend.algorithms.btree.BusinessBtree;
+import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
+
 
 
 
