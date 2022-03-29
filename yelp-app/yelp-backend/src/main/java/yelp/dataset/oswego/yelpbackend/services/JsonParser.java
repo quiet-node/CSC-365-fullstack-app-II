@@ -12,7 +12,6 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 public class JsonParser {
 
     BusinessBtree businessBtree = new BusinessBtree(64);
-    ArrayList<BusinessModel> businessList = new ArrayList<>();
 
     public BusinessBtree jsonParser(String PATH) {
         try {
@@ -49,11 +48,10 @@ public class JsonParser {
                     bCategories.add(categories[j].trim());
                 }
 
-                // a BusinessModel instance
+                // Init a BusinessModel instance
                 BusinessModel bModel = new BusinessModel(i, business_id, name, address, stars, reviews, similarityRate, bCategories);
-            
-                businessList.add(bModel);
-
+                
+                // add to businessBrree
                 businessBtree.insert(bModel);
 
             }
