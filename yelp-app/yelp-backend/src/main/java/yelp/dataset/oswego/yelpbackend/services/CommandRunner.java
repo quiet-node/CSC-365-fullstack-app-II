@@ -14,9 +14,9 @@ public class CommandRunner implements CommandLineRunner{
     public void run(String... args) throws Exception {
         // BusinessBtree btree = new JsonParser().jsonParser("/Users/logan/coding/SUNY_Oswego/CSC-365/In_Class/Assignment2/yelp-app/yelp-dataset/business.json");
         // new IOUtil().writeBtree(btree);
-        BusinessBtree businessBtree = new IOUtil().readBtree();
-        new IOUtil().writeNode(businessBtree);
-        new IOUtil().readNode();
+        BusinessBtree businessBtree = new IOService().readBtree();
+        new IOService().writeNode(businessBtree);
+        new IOService().readNode();
     }
 }
 

@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import yelp.dataset.oswego.yelpbackend.algorithms.btree.BusinessBtree;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
-public class JsonParser {
+public class JsonService {
 
     BusinessBtree businessBtree = new BusinessBtree(64);
 

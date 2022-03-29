@@ -7,7 +7,6 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @Data
 public class BusinessBNode implements Serializable{
-    // private BusinessModel[] BKeys;  // Array of business key
     protected BusinessModel[] BKeys;  // Array of business key
     protected BusinessBNode[] BChild;  // Array of business children
     protected int BMinDeg; // Minimum degree (defines the range for number of keys)

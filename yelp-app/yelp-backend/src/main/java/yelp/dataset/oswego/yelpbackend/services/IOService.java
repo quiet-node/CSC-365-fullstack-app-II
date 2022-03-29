@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import yelp.dataset.oswego.yelpbackend.algorithms.btree.BusinessBtree;
 
 @NoArgsConstructor
-public class IOUtil {
+public class IOService {
     private final String bTree = System.getProperty("user.dir") + "/yelp-app/yelp-dataset/btree.bin";
     private final String bTreeRoot = System.getProperty("user.dir") + "/yelp-app/yelp-dataset/btree-root.bin";
 
@@ -48,9 +48,7 @@ public class IOUtil {
         ByteBuffer wBuffer = ByteBuffer.allocate(4096); // 4KB
 
         // Write information to wBuffer
-        // wBuffer.putInt(businessBtree.getRoot().getBKeyNum());
         wBuffer.put("writing node...".getBytes());
-        
          
         
         // ByteBuffer::flip() is used to flip BB from "reading from I/O"(put) to "writing to I/O"(get) after a sequence of put
@@ -64,7 +62,7 @@ public class IOUtil {
         wChannel.close();
         raf.close();
         
-        System.out.println("Success!");
+        System.out.println("Successfully writing node to file!");
     }
 
     protected void readNode() throws IOException {
