@@ -8,12 +8,10 @@ import yelp.dataset.oswego.yelpbackend.algorithms.btree.BusinessBtree;
 
 
 @Component // this + CommandLineRunner are used to run code at application startup -like useEffect in React
-public class CommandRunner implements CommandLineRunner{
+public class RunnerService implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        // BusinessBtree btree = new JsonParser().jsonParser("/Users/logan/coding/SUNY_Oswego/CSC-365/In_Class/Assignment2/yelp-app/yelp-dataset/business.json");
-        // new IOUtil().writeBtree(btree);
         BusinessBtree businessBtree = new IOService().readBtree();
         new IOService().writeNode(businessBtree);
         new IOService().readNode();
