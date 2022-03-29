@@ -63,9 +63,8 @@ public class IOUtil {
         wBuffer.clear();
         wChannel.close();
         raf.close();
-
+        
         System.out.println("Success!");
-
     }
 
     protected void readNode() throws IOException {
@@ -73,24 +72,29 @@ public class IOUtil {
         RandomAccessFile raf = new RandomAccessFile(bTreeRoot, "rw");
 
         // Register FileChannel to operate read and write
-        FileChannel fChannel = raf.getChannel();
+        FileChannel wChannel = raf.getChannel();
 
-        // Allocaate bufferSize 
-        int bufferSize = 4096; // 4KB
-        if (bufferSize > fChannel.size()) {
-            bufferSize = (int) fChannel.size();
+        // Allocaate wFufferSize 
+        int wFufferSize = 4096; // 4KB
+        if (wFufferSize > wChannel.size()) {
+            wFufferSize = (int) wChannel.size();
         }
         
         // Register ByteBuffer to store message inside a buffer
-        ByteBuffer buff = ByteBuffer.allocate(bufferSize);
+        ByteBuffer wBuffer = ByteBuffer.allocate(wFufferSize);
 
         // Read the file to buffer
-        fChannel.read(buff);
+        wChannel.read(wBuffer);
         
-        // Flip the buffer
-        buff.flip();
+        // Flip the wBufferer
+        wBuffer.flip();
 
-        System.out.println("Reading from buffer: " +new String(buff.array()));
+        // clean up
+        wBuffer.clear();
+        wChannel.close();
+        raf.close();
+        
+        System.out.println("Reading from wBuffer: " +new String(wBuffer.array()));
     }
 
 }
