@@ -4,13 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 
+/* 
+    DESCRIPTION: Hash Table is an array of LinkedList, and each node::LinkedList is an instance of a hashmap contains key:frequency.
+*/
 public class HashTable {
-
-    /* 
-        DESCRIPTION: Hash Table is an array of LinkedList, and each node::LinkedList is an instance of a hashmap contains key:frequency.
-    */
-
- 
     /* 
     - capacity indicates how big the table is, how many items the table can contain
     - size is the number of elements in the hashtable

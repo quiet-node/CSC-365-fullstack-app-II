@@ -1,6 +1,8 @@
 package yelp.dataset.oswego.yelpbackend.dataStructure.btree;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
@@ -12,6 +14,8 @@ public class BusinessBNode implements Serializable{
     protected int BMinDeg; // Minimum degree (defines the range for number of keys)
     protected int BKeyNum; // number of business keys
     protected boolean BIsLeaf; 
+    List<BusinessModel> allKeys = new ArrayList<>(); // all keys of the whole btree
+
 
     public BusinessBNode(int BMinDeg, boolean BIsLeaf) {
         this.BMinDeg = BMinDeg;
@@ -38,6 +42,22 @@ public class BusinessBNode implements Serializable{
         // Print the subtree rooted with last child
         if (!BIsLeaf) BChild[i].traverse();
 
+    }
+
+    // A function to retrieve a list of all keys
+    public void addKeysToList() {
+
+        // There are n keys and n+1 children, traverse through n keys and first n children
+        int i = 0;
+        for (i = 0; i < this.BKeyNum; i++) {
+            
+            // If this is not leaf, then before add BKey[i] into allKeys list, traverse the subtree rooted with child BChild[i].
+            if (!this.BIsLeaf) BChild[i].addKeysToList();
+            allKeys.add(BKeys[i]);
+        }
+
+        // Traverse the subtree rooted with last childå
+        if (!BIsLeaf) BChild[i].addKeysToList();
     }
 
     // A function to search a key in the subtree rooted with this node.
@@ -151,3 +171,4 @@ public class BusinessBNode implements Serializable{
     }
     
 }
+

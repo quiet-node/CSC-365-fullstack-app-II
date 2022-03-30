@@ -1,6 +1,8 @@
 package yelp.dataset.oswego.yelpbackend.dataStructure.btree;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Getter;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
@@ -23,10 +25,22 @@ public class BusinessBtree implements Serializable{
 
     // function to traverse the tree
     public void traverse() {
-        if (this.root != null)
-            this.root.traverse();
+        if (this.root != null) this.root.traverse();
         System.out.println();
     }
+
+    // function to get all the keys
+    public List<BusinessModel> retrieveAllKeys() {
+        List<BusinessModel> allKeys = new ArrayList<>();
+        if (this.root != null) {
+            this.root.addKeysToList();
+            if (this.root.getAllKeys().size() > 0) {
+                allKeys = this.root.getAllKeys();
+            }
+        }
+        return allKeys;
+    }
+    
 
     // function to search a key 
     public BusinessBNode search(BusinessModel key) {
