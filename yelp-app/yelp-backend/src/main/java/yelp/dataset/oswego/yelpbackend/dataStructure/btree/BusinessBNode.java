@@ -1,8 +1,6 @@
 package yelp.dataset.oswego.yelpbackend.dataStructure.btree;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import lombok.Data;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
@@ -14,8 +12,6 @@ public class BusinessBNode implements Serializable{
     protected int BMinDeg; // Minimum degree (defines the range for number of keys)
     protected int BKeyNum; // number of business keys
     protected boolean BIsLeaf; 
-    List<BusinessModel> allKeys = new ArrayList<>(); // all keys of the whole btree
-
 
     public BusinessBNode(int BMinDeg, boolean BIsLeaf) {
         this.BMinDeg = BMinDeg;
@@ -44,39 +40,42 @@ public class BusinessBNode implements Serializable{
 
     }
 
-    // A function to retrieve a list of all keys
-    public void addKeysToList() {
-
-        // There are n keys and n+1 children, traverse through n keys and first n children
-        int i = 0;
-        for (i = 0; i < this.BKeyNum; i++) {
-            
-            // If this is not leaf, then before add BKey[i] into allKeys list, traverse the subtree rooted with child BChild[i].
-            if (!this.BIsLeaf) BChild[i].addKeysToList();
-            allKeys.add(BKeys[i]);
-        }
-
-        // Traverse the subtree rooted with last childå
-        if (!BIsLeaf) BChild[i].addKeysToList();
-    }
-
     // A function to search a key in the subtree rooted with this node.
-    protected BusinessBNode search(BusinessModel key) { // returns NULL if k is not present.
- 
+    protected BusinessBNode searchNode(BusinessModel key) { // returns NULL if k is not present.
         // Find the first key greater than or equal to k
         int i = 0;
-        while (i < this.BKeyNum && key.getId() > BKeys[i].getId())
+        while (i < this.BKeyNum && key.hashCode() > BKeys[i].hashCode())
             i++;
  
         // If the found key is equal to k, return this node
-        if (BKeys[i].getId() == key.getId())
+        if (BKeys[i].hashCode() == key.hashCode())
             return this;
  
         // If the key is not found here and this is a leaf node => null
         if (BIsLeaf) return null;
  
         // Go to the appropriate child
-        return BChild[i].search(key);
+        return BChild[i].searchNode(key);
+ 
+    }
+
+    // A function to search a key in the subtree rooted with this node.
+    protected BusinessModel searchKey(BusinessModel key) { // returns NULL if k is not present.
+ 
+        // Find the first key greater than or equal to k
+        int i = 0;
+        while (i < this.BKeyNum && key.hashCode() > BKeys[i].hashCode())
+            i++;
+ 
+        // If the found key is equal to k, return this node
+        if (BKeys[i].hashCode() == key.hashCode())
+            return this.BKeys[i];
+ 
+        // If the key is not found here and this is a leaf node => null
+        if (BIsLeaf) return null;
+ 
+        // Go to the appropriate child
+        return BChild[i].searchKey(key);
  
     }
 
@@ -92,7 +91,7 @@ public class BusinessBNode implements Serializable{
         // if this is a leaf node
         if (BIsLeaf) {
             // find the appropriate location of the new key 
-            while (tail >= 0 && BKeys[tail].getId() > key.getId()) {
+            while (tail >= 0 && BKeys[tail].hashCode() > key.hashCode()) {
                 BKeys[tail+1] = BKeys[tail]; // move all greater keys to one place ahead to make room for new key
                 tail--;
             }
@@ -103,7 +102,7 @@ public class BusinessBNode implements Serializable{
         } else { // if this node is not a leaf
             
             // first find the appropriate child for the new key
-            while (tail >= 0 && BKeys[tail].getId() > key.getId()) tail--;
+            while (tail >= 0 && BKeys[tail].hashCode() > key.hashCode()) tail--;
             
             if (BChild[tail+1].BKeyNum == (2 * BMinDeg -1)) { // if the child is full
 
@@ -115,7 +114,7 @@ public class BusinessBNode implements Serializable{
                 * Bchild[tail] is splitted into two children
                 * find the appropriate child to add the new key
                 */
-                if (BKeys[tail+1].getId() < key.getId()) tail++;
+                if (BKeys[tail+1].hashCode() < key.hashCode()) tail++;
             }
             BChild[tail+1].addKey(key);
         }
