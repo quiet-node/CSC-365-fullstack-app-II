@@ -16,7 +16,12 @@ public class JsonService {
     BusinessBtree businessBtree = new BusinessBtree(3);
     List<BusinessModel> businessList = new ArrayList<>();
 
-    public BusinessBtree jsonParser(String PATH) {
+    /**
+     * Init B-tree
+     * @param PATH the path to the file
+     * @return a BusinessBtree
+     */
+    public BusinessBtree initBusinessBtree(String PATH) {
         try {
             // buffrer reader to read lines in json file
             FileReader reader = new FileReader(PATH);
@@ -37,7 +42,7 @@ public class JsonService {
                 String address = bData.get("address").toString();
                 Double stars = bData.getDouble("stars");
                 Double reviews = bData.getDouble("review_count");
-                Double similarityRate = 99999.0;
+                Double similarityRate = -9999.0;
 
                 // A list of string for categories
                 ArrayList<String> bCategories = new ArrayList<String>();
@@ -69,8 +74,12 @@ public class JsonService {
         return businessBtree;
     }
 
-    // testing purpose
-    public List<BusinessModel> jsonParser2(String PATH) {
+    /**
+     * Init Business List
+     * @param PATH the path to the file
+     * @return a list of BusinessModel
+     */
+    public List<BusinessModel> initBusinessList(String PATH) {
         try {
             // buffrer reader to read lines in json file
             FileReader reader = new FileReader(PATH);

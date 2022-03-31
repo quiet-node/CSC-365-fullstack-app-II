@@ -33,7 +33,10 @@ public class BusinessBNode implements Serializable{
     }
 
 
-    // A function to traverse all nodes in a subtree rooted with this node
+    /**
+     * ref: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
+     * Traverse through the this BusinessBtree and print the keys out
+     */
     protected void traverse() {
         
         // There are n keys and n+1 children, traverse through n keys and first n children
@@ -51,7 +54,12 @@ public class BusinessBNode implements Serializable{
 
     }
 
-    // A function to search a key in the subtree rooted with this node.
+    /**
+     * ref: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
+     * A function to search a key in the subtree rooted with this node.
+     * @param key type BusinessModel
+     * @return BusinessBNode
+     */
     protected BusinessBNode findNode(BusinessModel key) { // returns NULL if k is not present.
         // Find the first key greater than or equal to k
         int i = 0;
@@ -70,9 +78,16 @@ public class BusinessBNode implements Serializable{
  
     }
 
-    // A function to search a key in the subtree rooted with this node.
-    public BusinessModel searchKey(BusinessModel key) { // returns NULL if k is not present.
- 
+    /**
+     * ref: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
+     * A function to search a key in the subtree rooted with this node.
+     * @param key type BusinessModel
+     * @return BusinessModel
+     */
+    protected BusinessModel findKeyByBusinessID(int keyID) { // returns NULL if k is not present.
+        // Init null BusinessModel with the id
+        BusinessModel key = new BusinessModel(keyID);
+
         // Find the first key greater than or equal to k
         int i = 0;
         while (i < this.BKeyNum && key.getId() > BKeys.get(i).getId())
@@ -86,13 +101,13 @@ public class BusinessBNode implements Serializable{
         if (BIsLeaf) return null;
  
         // Go to the appropriate child
-        return BChild.get(i).searchKey(key);
+        return BChild.get(i).findKeyByBusinessID(keyID);
  
     }
 
-    /*  
+    /** 
     *   ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    *   add a new key to a non-full node 
+    *   A function to add a new key to a non-full node 
     */
     protected void addKey(BusinessModel key) {
 
@@ -132,9 +147,9 @@ public class BusinessBNode implements Serializable{
 
     }
 
-    /* 
+    /** 
     * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    * split the child newNode => newNode must be full to split
+    * A function splits the child newNode => newNode must be full to split
     */
     protected void splitChild(int pos, BusinessBNode splittedNode) {
 

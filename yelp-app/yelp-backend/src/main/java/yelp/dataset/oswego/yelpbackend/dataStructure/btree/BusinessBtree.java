@@ -5,14 +5,13 @@ import java.io.Serializable;
 import lombok.Getter;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
+/** 
+*   POJO will be wiped off by garbge collector after a running session
+*   Needs to store on disk for disk => transfrom POJO into byte stream
+*   java.io.Serializable does such job
+*/
 @Getter
 public class BusinessBtree implements Serializable{
-    /* 
-    *   - POJO will be wiped off by garbge collector after a running session
-    *   - Needs to store on disk for disk => transfrom POJO into byte stream
-    *   - java.io.Serializable does such job
-    */
-
     private BusinessBNode root;
     private int minDeg; 
 
@@ -21,14 +20,22 @@ public class BusinessBtree implements Serializable{
         this.minDeg = minDeg;
     }
 
-    // function to traverse the tree
+    /**
+     * An implementation for BusinessBNode::traverse()
+     * A function to traverse through the tree
+     */
     public void traverse() {
         if (this.root != null)
             this.root.traverse();
         System.out.println();
     }
 
-    // function to search a key 
+    /**
+     * An implementation for BusinessBNode::findNode(BusinessModel key).
+     * A function to find a node 
+     * @param key BusinessModel
+     * @return BusinessBNode
+     */
     public BusinessBNode findNode(BusinessModel key) {
         if (this.root == null)
             return null;
@@ -36,18 +43,25 @@ public class BusinessBtree implements Serializable{
             return this.root.findNode(key);
     }
 
-    // function to search a key 
-    public BusinessModel searchKey(BusinessModel key) {
+ 
+    /**
+     * An implementation for BusinessBNode::findKeyByBusinessID(int keyID).
+     * A function to find a key using businessID
+     * @param keyID int
+     * @return BusinessModel
+     */
+    public BusinessModel findKeyByBusinessID(int keyID) {
         if (this.root == null)
             return null;
         else
-            return this.root.searchKey(key);
+            return this.root.findKeyByBusinessID(keyID);
     }
 
-    /* 
-    * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    * Inserts a new key to BusinessBTree
-    */
+    /**
+     * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+     * @param key BusinessModel
+     * Inserts a new key to BusinessBTree
+     */
     public void insert(BusinessModel key) {
         if (root == null) { // if tree is empty
             // init new root
