@@ -1,6 +1,7 @@
 package yelp.dataset.oswego.yelpbackend.dataStructure.btree;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Getter;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
@@ -94,5 +95,20 @@ public class BusinessBtree implements Serializable{
                 root.addKey(key);
             }
         }
+    }
+
+    /**
+     * An implementation for BusinessBNode::getRandomBusinesses(int amount).
+     * A function to get a list of random businesses with the size of amount
+     * @param amount
+     * @return
+     */
+    public List<BusinessModel> getRandomBusinesses(int amount) {
+        if (this.root == null)
+            return null;
+        else
+            if (this.root.getRandomBusinesses(amount) == null) 
+                return null;
+            return this.root.getRandomBusinesses(amount);
     }
 }

@@ -3,6 +3,7 @@ package yelp.dataset.oswego.yelpbackend.dataStructure.btree;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -194,6 +195,23 @@ public class BusinessBNode implements Serializable{
         // increment BKeyNum
         BKeyNum += 1;
 
+    }
+
+    /**
+     * A function to get a certain amount of random businesses
+     * @param amount amout of businesses
+     * @return a list of BusinessModel with the size of amount
+     */
+    protected List<BusinessModel> getRandomBusinesses(int amount) {
+        List<BusinessModel> randomBusinessList = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < amount; i++) {
+            int keyID = random.nextInt(10000);
+            randomBusinessList.add(findKeyByBusinessID(keyID));
+        }
+        
+        return randomBusinessList;
     }
     
 }
