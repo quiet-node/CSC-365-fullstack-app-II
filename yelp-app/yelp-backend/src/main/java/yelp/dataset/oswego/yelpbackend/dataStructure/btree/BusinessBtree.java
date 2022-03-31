@@ -29,17 +29,17 @@ public class BusinessBtree implements Serializable{
     }
 
     // function to search a key 
-    public BusinessBNode searchNode(BusinessModel key) {
+    public BusinessBNode findNode(int key) {
         if (this.root == null)
             return null;
         else
-            return this.root.searchNode(key);
+            return this.root.findNode(key);
     }
 
     // function to search a key 
-    public BusinessModel searchKey(BusinessModel key) {
+    public int searchKey(int key) {
         if (this.root == null)
-            return null;
+            return -1;
         else
             return this.root.searchKey(key);
     }
@@ -48,11 +48,11 @@ public class BusinessBtree implements Serializable{
     * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
     * Inserts a new key to BusinessBTree
     */
-    public void insert(BusinessModel key) {
+    public void insert(int key) {
         if (root == null) { // if tree is empty
             // init new root
             root = new BusinessBNode(this.minDeg, true);
-            root.BKeys[0] = key;
+            root.BKeys.set(0, key);
             root.BKeyNum = 1;
         } else { // tree is not empty
             // If root is full, then tree grows in height
@@ -62,16 +62,16 @@ public class BusinessBtree implements Serializable{
                 BusinessBNode newRoot = new BusinessBNode(minDeg, false);
 
                 // make old root as child of new root
-                newRoot.BChild[0] = root;
+                newRoot.BChild.set(0, root);
 
                 // split the old root and move 1 key to the new root
                 newRoot.splitChild(0, root);
 
                 // New root has two children now. Decide which of the two children is going to have new key
                 int index = 0;
-                if (newRoot.BKeys[0].getId() < key.getId()) 
+                if (newRoot.BKeys.get(0) < key) 
                     index++; 
-                newRoot.BChild[index].addKey(key);
+                newRoot.BChild.get(index).addKey(key);
 
                 // change root for the whole tree
                 root = newRoot;

@@ -52,7 +52,7 @@ public class JsonService {
                 BusinessModel bModel = new BusinessModel(i, business_id, name, address, stars, reviews, similarityRate, bCategories);
                 
                 // add to businessBrree
-                businessBtree.insert(bModel);
+                // businessBtree.insert(bModel);
 
             }
             br.close();
