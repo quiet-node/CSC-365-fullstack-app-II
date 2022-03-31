@@ -23,6 +23,10 @@ public class BusinessModel implements Serializable {
     private double stars, reviews, similarityRate;
     private ArrayList<String> categories;
 
+    public BusinessModel(long id) {
+        this.id = id;
+    }
+
     public int compareTo(BusinessModel b) {
         return Double.compare(this.getSimilarityRate(), b.similarityRate);
     }
