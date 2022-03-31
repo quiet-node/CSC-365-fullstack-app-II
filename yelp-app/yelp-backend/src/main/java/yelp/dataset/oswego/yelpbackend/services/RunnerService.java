@@ -9,13 +9,15 @@ import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
 public class RunnerService implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
-        BusinessBtree btree = new BusinessBtree(3);
-        for (int i = 0; i < 10; i++) {
+        BusinessBtree btree = new BusinessBtree(64);
+        for (int i = 0; i < 10000; i++) {
             btree.insert(i);
         }
 
         System.out.println(btree.getRoot());
-        System.out.println( btree.findNode(6));
+        for(int i = 0; i < 10000; i++) {
+            System.out.print( "Key: " + btree.searchKey(i) + " ");
+        }
     }
 }
 

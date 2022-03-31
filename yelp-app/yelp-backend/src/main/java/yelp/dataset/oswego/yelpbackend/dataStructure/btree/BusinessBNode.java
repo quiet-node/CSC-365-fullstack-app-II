@@ -6,7 +6,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @Data
 @NoArgsConstructor
@@ -75,7 +74,7 @@ public class BusinessBNode implements Serializable{
  
         // Find the first key greater than or equal to k
         int i = 0;
-        while (i < this.BKeyNum - 1 && key > BKeys.get(i))
+        while (i < this.BKeyNum && key > BKeys.get(i))
             i++;
  
         // If the found key is equal to k, return this node
