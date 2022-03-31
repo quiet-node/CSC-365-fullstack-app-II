@@ -25,7 +25,7 @@ public class JsonService {
 
 
             // loop through the json file
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10000; i++) {
                 // each line of the file is a json object
                 line = br.readLine();
 
@@ -68,6 +68,8 @@ public class JsonService {
         }
         return businessBtree;
     }
+
+    // testing purpose
     public List<BusinessModel> jsonParser2(String PATH) {
         try {
             // buffrer reader to read lines in json file
@@ -77,7 +79,7 @@ public class JsonService {
 
 
             // loop through the json file
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10000; i++) {
                 // each line of the file is a json object
                 line = br.readLine();
 
