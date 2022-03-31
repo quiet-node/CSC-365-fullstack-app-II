@@ -35,8 +35,8 @@ public class BusinessBNode implements Serializable{
 
 
     /**
-     * ref: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
-     * Traverse through the this BusinessBtree and print the keys out
+     * Traverse through the this BusinessBtree and print the keys out.
+     * Reference: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
      */
     protected void traverse() {
         
@@ -56,9 +56,9 @@ public class BusinessBNode implements Serializable{
     }
 
     /**
-     * ref: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
      * A function to search a key in the subtree rooted with this node.
-     * @param key type BusinessModel
+     * Reference: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
+     * @param key 
      * @return BusinessBNode
      */
     protected BusinessBNode findNode(BusinessModel key) { // returns NULL if k is not present.
@@ -80,9 +80,9 @@ public class BusinessBNode implements Serializable{
     }
 
     /**
-     * ref: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
      * A function to search a key in the subtree rooted with this node.
-     * @param key type BusinessModel
+     * Reference: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
+     * @param key 
      * @return BusinessModel
      */
     protected BusinessModel findKeyByBusinessID(int keyID) { // returns NULL if k is not present.
@@ -106,10 +106,11 @@ public class BusinessBNode implements Serializable{
  
     }
 
-    /** 
-    *   ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    *   A function to add a new key to a non-full node 
-    */
+    /**
+     * A function to add a new key to a non-full node.
+     * Refernece: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+     * @param key
+     */
     protected void addKey(BusinessModel key) {
 
         // Init tail
@@ -148,10 +149,12 @@ public class BusinessBNode implements Serializable{
 
     }
 
-    /** 
-    * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-    * A function splits the child newNode => newNode must be full to split
-    */
+    /**
+     * A function splits the child newNode => newNode must be full to split.
+     * Reference: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+     * @param pos position
+     * @param splittedNode
+     */
     protected void splitChild(int pos, BusinessBNode splittedNode) {
 
         // create a new node to store (t-1) keys of splittedNode
@@ -198,8 +201,8 @@ public class BusinessBNode implements Serializable{
     }
 
     /**
-     * A function to get a certain amount of random businesses
-     * @param amount amout of businesses
+     * A function to get a certain amount of random businesses.
+     * @param amount 
      * @return a list of BusinessModel with the size of amount
      */
     protected List<BusinessModel> getRandomBusinesses(int amount) {

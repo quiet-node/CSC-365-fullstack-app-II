@@ -17,9 +17,9 @@ public class JsonService {
     List<BusinessModel> businessList = new ArrayList<>();
 
     /**
-     * Init B-tree
+     * Initialize a B-tree
      * @param PATH the path to the file
-     * @return a BusinessBtree
+     * @return BusinessBtree
      */
     public BusinessBtree initBusinessBtree(String PATH) {
         try {
@@ -75,7 +75,7 @@ public class JsonService {
     }
 
     /**
-     * Init Business List
+     * Initialize a Business List
      * @param PATH the path to the file
      * @return a list of BusinessModel
      */

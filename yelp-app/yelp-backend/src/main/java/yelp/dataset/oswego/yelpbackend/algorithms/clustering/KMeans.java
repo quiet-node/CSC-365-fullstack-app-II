@@ -11,20 +11,42 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
  */
 @Data
 public class KMeans {
-    public Map<Record, List<Record>> initializeClusers(BusinessBtree businessBtree, int amount) {
-        for (int i = 0; i < amount; i++) {
-            System.out.println("EACH: " +generateRandomCentroids(businessBtree, amount).get(i));
-        }
+    /**
+     * A function to initialize clusters
+     * @param businessBtree 
+     * @param k number of clusters
+     * @return clusters
+     */
+    public Map<Record, List<Record>> initializeClusers(BusinessBtree businessBtree, int k) {
         return null;
     }
 
-    private List<Centroid> generateRandomCentroids(BusinessBtree businessBtree, int amount) {
+    /**
+     * A function to generate centroids randomly
+     * @param businessBtree
+     * @param k
+     * @return a list of random centroids
+     */
+    private List<Centroid> generateRandomCentroids(BusinessBtree businessBtree, int k) {
         List<Centroid> centroids = new ArrayList<>();
-        List<BusinessModel> businessList = businessBtree.getRandomBusinesses(amount);
+        List<BusinessModel> businessList = businessBtree.getRandomBusinesses(k);
 
         for (int i = 0; i < businessList.size(); i++) {
             centroids.add(new Centroid(businessList.get(i).getId(), businessList.get(i).getName(), businessList.get(i).getCategories()));
         }
         return centroids;
     }
+
+    /**
+     * A function to find the neareest centroid
+     * @param record
+     * @param centroids
+     * @return the nearest centroid
+     */
+    private Centroid nearestCentroid(Record record, List<Centroid> centroids) {
+
+        return null;
+    }
+
+
 }

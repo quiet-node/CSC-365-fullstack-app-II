@@ -34,7 +34,7 @@ public class BusinessBtree implements Serializable{
     /**
      * An implementation for BusinessBNode::findNode(BusinessModel key).
      * A function to find a node 
-     * @param key BusinessModel
+     * @param key 
      * @return BusinessBNode
      */
     public BusinessBNode findNode(BusinessModel key) {
@@ -48,7 +48,7 @@ public class BusinessBtree implements Serializable{
     /**
      * An implementation for BusinessBNode::findKeyByBusinessID(int keyID).
      * A function to find a key using businessID
-     * @param keyID int
+     * @param keyID
      * @return BusinessModel
      */
     public BusinessModel findKeyByBusinessID(int keyID) {
@@ -59,9 +59,9 @@ public class BusinessBtree implements Serializable{
     }
 
     /**
-     * ref: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
-     * @param key BusinessModel
-     * Inserts a new key to BusinessBTree
+     * A function to insert a new key to BusinessBTree.
+     * Reference: https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+     * @param key (BusinessModel)
      */
     public void insert(BusinessModel key) {
         if (root == null) { // if tree is empty
