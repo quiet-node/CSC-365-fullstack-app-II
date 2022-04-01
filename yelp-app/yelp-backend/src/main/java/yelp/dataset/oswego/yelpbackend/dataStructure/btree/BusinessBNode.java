@@ -210,9 +210,8 @@ public class BusinessBNode implements Serializable{
         Random random = new Random();
 
         for (int i = 0; i < amount; i++) {
-            // int keyID = random.nextInt(10000);
-            // randomBusinessList.add(findKeyByBusinessID(keyID));
-            randomBusinessList.add(findKeyByBusinessID(i));
+            int keyID = random.nextInt(10000);
+            randomBusinessList.add(findKeyByBusinessID(keyID));
         }
         
         return randomBusinessList;

@@ -2,14 +2,12 @@ package yelp.dataset.oswego.yelpbackend.algorithms.clustering;
 
 import java.util.*;
 
-import lombok.Data;
 import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
-
-@Data
 public class KMeans {
+
     /**
      * A function to initialize clusters.
      * Reference: https://www.baeldung.com/java-k-means-clustering-algorithm
@@ -17,11 +15,17 @@ public class KMeans {
      * @param k number of clusters
      * @return clusters
      */
-    public Map<Record, List<Record>> initializeClusers(BusinessBtree businessBtree, int k) {
-        List<BusinessModel> centroids = generateRandomCentroids(businessBtree, 7);
+    public Map<Centroid, List<BusinessModel>> initializeClusers(BusinessBtree businessBtree, int k) {
+        Map<Centroid, List<BusinessModel>> clusters = new HashMap<>();
+        List<Centroid> centroids = generateRandomCentroids(businessBtree, k);
         List<BusinessModel> records = businessBtree.findAll();
 
-        return null;
+        for (BusinessModel record : records) {
+                Centroid centroid = nearestCentroid(record, centroids);
+                assignToCluster(clusters, record, centroid);
+        }
+
+        return clusters;
     }
 
     /**
@@ -30,13 +34,14 @@ public class KMeans {
      * @param k
      * @return a list of random centroids
      */
-    private List<BusinessModel> generateRandomCentroids(BusinessBtree businessBtree, int k) {
-        List<BusinessModel> centroids = new ArrayList<>();
+    private List<Centroid> generateRandomCentroids(BusinessBtree businessBtree, int k) {
+        List<Centroid> centroids = new ArrayList<>();
         List<BusinessModel> businessList = businessBtree.findRandomBusinesses(k);
 
         for (int i = 0; i < businessList.size(); i++) {
-            centroids.add(businessList.get(i));
+            centroids.add(new Centroid( businessList.get(i).getId(), businessList.get(i).getName(), businessList.get(i).getCategories()));
         }
+        
         return centroids;
     }
 
@@ -46,24 +51,40 @@ public class KMeans {
      * @param centroids
      * @return the nearest centroid
      */
-    private BusinessModel nearestCentroid(BusinessModel record, List<BusinessModel> centroids) {
-        
+    private Centroid nearestCentroid(BusinessModel record, List<Centroid> centroids) {
         double maximumSimRate = Double.NEGATIVE_INFINITY;
-        BusinessModel nearest = null;
+        Centroid nearest = null;
 
-        for (BusinessModel centroid : centroids) {
-
+        for (Centroid centroid : centroids) {
             double currentSimRate = new CosSim().calcSimRate(record.getCategories(), centroid.getCategories());
-            
-            if (currentSimRate > maximumSimRate) {
+            if (currentSimRate > maximumSimRate && record.getId() != centroid.getId()) {
                 maximumSimRate = currentSimRate;
                 nearest = centroid;
                 record.setSimilarityRate(currentSimRate);
             }
         }
-
         return nearest;
     }
 
+    /**
+     * A function to assign records to clusters based on centroids. 
+     * Only records with simRate > 75% will pass.
+     * Each clusters will have max 35 records
+     * @param clusters
+     * @param record
+     * @param centroid
+     */
+    private void assignToCluster(Map<Centroid, List<BusinessModel>> clusters, BusinessModel record, Centroid centroid) {
+        List<BusinessModel> records = clusters.get(centroid);
+        if (records == null) {
+            records = new ArrayList<>();
+        }
+        if (records.size() < 35) {
+            if (record.getSimilarityRate() > 0.75) {
+                records.add(record);
+            }
+            clusters.put(centroid, records);
+        }
+    }
 
 }
