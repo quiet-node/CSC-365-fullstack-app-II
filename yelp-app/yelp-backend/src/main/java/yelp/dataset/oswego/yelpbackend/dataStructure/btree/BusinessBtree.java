@@ -21,29 +21,6 @@ public class BusinessBtree implements Serializable{
         this.minDeg = minDeg;
     }
 
-    /**
-     * An implementation for BusinessBNode::traverse()
-     * A function to traverse through the tree
-     */
-    public void traverse() {
-        if (this.root != null)
-            this.root.traverse();
-        System.out.println();
-    }
-
-    /**
-     * An implementation for BusinessBNode::findNode(BusinessModel key).
-     * A function to find a node 
-     * @param key 
-     * @return BusinessBNode
-     */
-    public BusinessBNode findNode(BusinessModel key) {
-        if (this.root == null)
-            return null;
-        else
-            return this.root.findNode(key);
-    }
-
  
     /**
      * An implementation for BusinessBNode::findKeyByBusinessID(int keyID).

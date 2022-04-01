@@ -30,54 +30,8 @@ public class BusinessBNode implements Serializable{
         for (int i=0; i < (2*BMinDeg); i++) {
             this.BChild.add(new BusinessBNode());
         }
-        
     }
 
-
-    /**
-     * Traverse through the this BusinessBtree and print the keys out.
-     * Reference: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
-     */
-    protected void traverse() {
-        
-        // There are n keys and n+1 children, traverse through n keys and first n children
-        int i = 0;
-        for (i = 0; i < this.BKeyNum; i++) {
-            
-            // If this is not leaf, then before printing BKey[i], traverse the subtree rooted with child BChild[i].
-            if (!this.BIsLeaf) BChild.get(i).traverse();
-            
-            System.out.print(BKeys.get(i) + " ");
-        }
- 
-        // Print the subtree rooted with last child
-        if (!BIsLeaf) BChild.get(i).traverse();
-
-    }
-
-    /**
-     * A function to search a key in the subtree rooted with this node.
-     * Reference: https://www.geeksforgeeks.org/introduction-of-b-tree-2/
-     * @param key 
-     * @return BusinessBNode
-     */
-    protected BusinessBNode findNode(BusinessModel key) { // returns NULL if k is not present.
-        // Find the first key greater than or equal to k
-        int i = 0;
-        while (i < this.BKeyNum && key.getId() > BKeys.get(i).getId())
-            i++;
- 
-        // If the found key is equal to k, return this node
-        if (BKeys.get(i).getId() == key.getId())
-            return this;
- 
-        // If the key is not found here and this is a leaf node => null
-        if (BIsLeaf) return null;
- 
-        // Go to the appropriate child
-        return BChild.get(i).findNode(key);
- 
-    }
 
     /**
      * A function to search a key in the subtree rooted with this node.
@@ -213,7 +167,6 @@ public class BusinessBNode implements Serializable{
             int keyID = random.nextInt(10000);
             randomBusinessList.add(findKeyByBusinessID(keyID));
         }
-        
         return randomBusinessList;
     }
 

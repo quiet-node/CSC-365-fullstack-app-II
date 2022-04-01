@@ -13,8 +13,12 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 public class RunnerService implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
+        // new IOService().writeBtree(new JsonService().initBusinessBtree("/Users/logan/coding/SUNY_Oswego/CSC-365/In_Class/Assignment2/yelp-app/yelp-dataset/business.json"));
+
         BusinessBtree businessBtree = new IOService().readBtree();
         Map<Centroid, List<BusinessModel>> clusters = new KMeans().initializeClusers(businessBtree, 7);
+
+
     }
 }
 
