@@ -1,31 +1,27 @@
 package yelp.dataset.oswego.yelpbackend.algorithms.similarity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import lombok.NoArgsConstructor;
 import yelp.dataset.oswego.yelpbackend.dataStructure.hashTable.HashTable;
-import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @NoArgsConstructor
 public class CosSim {
-    
-
     private double cosSimRate;
-    
-    
-    /* 
-    * catFilter:string => filter out the "&" and " "
-    * For example:
-    *      catA = ["Gastropubs"," Food"," Beer Gardens"," Restaurants"," Bars"," American (Traditional)"," Beer Bar"," Nightlife"," Breweries"]
-    *      catB = [Restaurant, Beauty & Spa,  Coffee & Tea, Hair Salons, Food]
-    * Then catFilter return a HashSet
-    *      vector =  [American, Store, Gardens, Coffee, Restaurants, Beer, Nightlife, Gastropubs, Tea, Convenience, Bar, Breweries, (Traditional), Food, Bars]      
-    */
 
+    /**
+     * A function filters out the "&" and " " from the Yelp dataset
+     * For example:
+     *      catA = ["Gastropubs"," Food"," Beer Gardens"," Restaurants"," Bars"," American (Traditional)"," Beer Bar"," Nightlife"," Breweries"]
+     *      catB = [Restaurant, Beauty & Spa,  Coffee & Tea, Hair Salons, Food]
+     * Then catFilter return a HashSet
+     *      vector =  [American, Store, Gardens, Coffee, Restaurants, Beer, Nightlife, Gastropubs, Tea, Convenience, Bar, Breweries, (Traditional), Food, Bars] 
+     * @param catA
+     * @param catB
+     * @return HashSet termMatrix
+     */
     private HashSet<String> catFilter(ArrayList<String> catA, ArrayList<String> catB) {
-
         HashSet<String> termMatrix = new HashSet<>();
 
         // filter catA
@@ -55,9 +51,13 @@ public class CosSim {
         return termMatrix;
     }
 
-    // makeVector:HashTable => vector of each category
+    /**
+     * A function to make a vector for each category
+     * @param termMatrix
+     * @param categories
+     * @return HashTable vector
+     */
     private HashTable makeVector(HashSet<String> termMatrix, ArrayList<String> categories) {
-
         // init a vector:hashtable
         HashTable vector = new HashTable(10);
 
@@ -79,12 +79,13 @@ public class CosSim {
         return vector;
     }
 
-    
-    
-
-    // dotProduct:double => how many similimar words
+    /**
+     * A function to calculate dot product of two vectors
+     * @param catA
+     * @param catB
+     * @return dot product
+     */
     private double calcDotProduct(ArrayList<String> catA, ArrayList<String> catB) {
-        
         // init dotProd:double
         double dotProd = 0;
 
@@ -105,18 +106,17 @@ public class CosSim {
                     int product = valueA * valueB;
                     dotProd += product; 
             }
-
-
-
         }
-
         return dotProd;        
     }
 
-
-    // Magnitude of each vector
+    /**
+     * A function calculates the magnitude of each vector 
+     * @param termMatrix
+     * @param vector
+     * @return vector's magnitude
+     */
     private double calcMagnitude(HashSet<String> termMatrix, HashTable vector) {
-        
         double sumFreq = 0.0;
         
         // loop through termMatrix
@@ -131,7 +131,12 @@ public class CosSim {
     }
 
 
-    // Magnitude product of the 2 vectors
+    /**
+     * A function to calculate magnitude product of 2 vectors
+     * @param catA
+     * @param catB
+     * @return magnitude product
+     */
     private double calcMagProduct(ArrayList<String> catA, ArrayList<String> catB) {
 
         // termMatrix contains all relevant words from catA and catB
@@ -151,17 +156,20 @@ public class CosSim {
 
 
     // calculate simRate 
-    public double calcSimRate(BusinessModel businessA, BusinessModel businessB) {
+    /**
+     * Main function to calculate the similarity rate between 2 categories using Cosine Similarity metric
+     * @param categoriesA
+     * @param categoriesB
+     * @return similarity rate
+     */
+    public double calcSimRate(ArrayList<String> categoriesA, ArrayList<String> categoriesB) {
         /* 
         * Cos(X, Y) = (X.Y) / (||X|| * ||Y||)
         * Pseudo: simRate = Cos(X,Y) = (dotProduct) / (Magnitude vector X * Magnitude vector Y)
         */
 
-        ArrayList<String> catA = businessA.getCategories();
-        ArrayList<String> catB = businessB.getCategories();
-
-        double dotProduct = calcDotProduct(catA, catB);
-        double magProduct = calcMagProduct(catA, catB);
+        double dotProduct = calcDotProduct(categoriesA, categoriesB);
+        double magProduct = calcMagProduct(categoriesA, categoriesB);
 
         this.cosSimRate = dotProduct / magProduct;
 
