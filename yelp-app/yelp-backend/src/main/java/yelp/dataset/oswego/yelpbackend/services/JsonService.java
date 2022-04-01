@@ -12,7 +12,7 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 @Getter
 public class JsonService {
-    BusinessBtree businessBtree = new BusinessBtree(3);
+    BusinessBtree businessBtree = new BusinessBtree(64);
     
     /**
      * Initialize a B-tree
