@@ -98,17 +98,32 @@ public class BusinessBtree implements Serializable{
     }
 
     /**
-     * An implementation for BusinessBNode::getRandomBusinesses(int amount).
+     * An implementation for BusinessBNode::findRandomBusinesses(int amount).
      * A function to get a list of random businesses with the size of amount
      * @param amount
      * @return
      */
-    public List<BusinessModel> getRandomBusinesses(int amount) {
+    public List<BusinessModel> findRandomBusinesses(int amount) {
         if (this.root == null)
             return null;
         else
-            if (this.root.getRandomBusinesses(amount) == null) 
+            if (this.root.findRandomBusinesses(amount) == null) 
                 return null;
-            return this.root.getRandomBusinesses(amount);
+            return this.root.findRandomBusinesses(amount);
     }
+
+    /**
+     * An implementation for BusinessBNode::findAll().
+     * A function to get a list of all businessKey
+     * @return
+     */
+    public List<BusinessModel> findAll() {
+        if (this.root == null)
+            return null;
+        else
+            if (this.root.findAll() == null) 
+                return null;
+            return this.root.findAll();
+    }
+
 }

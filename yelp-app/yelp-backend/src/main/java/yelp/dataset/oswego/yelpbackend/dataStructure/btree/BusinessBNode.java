@@ -205,16 +205,29 @@ public class BusinessBNode implements Serializable{
      * @param amount 
      * @return a list of BusinessModel with the size of amount
      */
-    protected List<BusinessModel> getRandomBusinesses(int amount) {
+    protected List<BusinessModel> findRandomBusinesses(int amount) {
         List<BusinessModel> randomBusinessList = new ArrayList<>();
         Random random = new Random();
 
         for (int i = 0; i < amount; i++) {
-            int keyID = random.nextInt(10000);
-            randomBusinessList.add(findKeyByBusinessID(keyID));
+            // int keyID = random.nextInt(10000);
+            // randomBusinessList.add(findKeyByBusinessID(keyID));
+            randomBusinessList.add(findKeyByBusinessID(i));
         }
         
         return randomBusinessList;
+    }
+
+    /**
+     * A function to return a list of all key
+     * @return a list of all key
+     */
+    protected List<BusinessModel> findAll() {
+        List<BusinessModel> allKeys = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            allKeys.add(findKeyByBusinessID(i));
+        }
+        return allKeys;
     }
     
 }
