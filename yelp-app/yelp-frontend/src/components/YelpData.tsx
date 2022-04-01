@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchIcon from '@material-ui/icons/Search';
 import Header from './Header';
-import BusinessList from './BusinessList';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -40,11 +39,7 @@ const YelpData = () => {
           `http://localhost:8080/yelpdata/${businessName}`
         );
 
-        console.log(businessByName);
-        console.log(similarBusinesses.status);
-
         await similarBusinesses.data.map((data: any) => {
-          console.log(data);
           similarBs.push(data);
         });
 
@@ -64,7 +59,9 @@ const YelpData = () => {
   };
 
   const getAllBs = async () => {
-    const res = await axios.get('http://localhost:8080/yelpdata/allbusinesses');
+    const res = await axios.get(
+      'http://localhost:8080/yelpdata/get-all-businesses'
+    );
 
     res.data.map((data: any) => {
       allBs.push(data);
