@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
+import yelp.dataset.oswego.yelpbackend.services.RestService;
 
 @RestController
 @RequestMapping("/yelpdata")
@@ -34,23 +35,10 @@ public class BusinessController {
 
     @GetMapping("/similar/{businessName}")
     public List<BusinessModel> getSimilarBusinesses(@PathVariable String businessName) {
-        CosSim cosSim = new CosSim();
-
         List<BusinessModel> allBusinesses = repo.findAll();
-
-        List<BusinessModel> similarBusinesses = new ArrayList<BusinessModel>();
-
         BusinessModel targetB = repo.findByName(businessName).get(0);
-
-        for (BusinessModel b : allBusinesses) {
-            double cosSimRate = cosSim.calcSimRate(targetB.getCategories(), b.getCategories());
-            b.setSimilarityRate(cosSimRate);  
-                if (b.getSimilarityRate() >= 0.55 && b.getSimilarityRate() <= 1) {
-                           similarBusinesses.add(b);
-                }
-        }
-
-        Collections.sort(similarBusinesses, Collections.reverseOrder());
+    
+        List<BusinessModel> similarBusinesses = new RestService().getSimilarBusinesses(allBusinesses, targetB);
         
         return similarBusinesses;
     }
