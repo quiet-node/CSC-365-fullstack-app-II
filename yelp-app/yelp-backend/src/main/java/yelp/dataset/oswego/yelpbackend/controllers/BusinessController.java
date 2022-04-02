@@ -1,8 +1,10 @@
 package yelp.dataset.oswego.yelpbackend.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import yelp.dataset.oswego.yelpbackend.algorithms.clustering.Centroid;
 import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
@@ -29,8 +32,7 @@ public class BusinessController {
     public ResponseEntity<List<BusinessModel>> getAllBusinesses() {
         List<BusinessModel> allBusinesses = repo.findAll();
         if (allBusinesses == null) 
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         
         return new ResponseEntity<>(allBusinesses, HttpStatus.OK);
     }
@@ -39,7 +41,7 @@ public class BusinessController {
     public ResponseEntity<List<BusinessModel>> getBusinessByName(@PathVariable String businessName) {
         List<BusinessModel> business = repo.findByName(businessName);
         if (business == null) 
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         
         return new ResponseEntity<>(business, HttpStatus.OK);
     }
@@ -48,7 +50,7 @@ public class BusinessController {
     public ResponseEntity<List<BusinessModel>> getSimilarBusinesses(@PathVariable String businessName) {
         List<BusinessModel> allBusinesses = repo.findAll();
         if (allBusinesses == null) 
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         
         BusinessModel targetB = repo.findByName(businessName).get(0);
         List<BusinessModel> similarBusinesses = new RestService().getSimilarBusinesses(allBusinesses, targetB);
@@ -56,6 +58,11 @@ public class BusinessController {
         return  new ResponseEntity<>(similarBusinesses, HttpStatus.OK);
     }
 
+    @GetMapping("/fetch-random-clusters")
+    public ResponseEntity<Map<Centroid, List<BusinessModel>>> fetchRandomCluster() throws IOException {
+        Map<Centroid, List<BusinessModel>> clusters = new RestService().fetchClusters();
+        return new ResponseEntity<>(clusters, HttpStatus.OK);
+    }
 
     
 }
