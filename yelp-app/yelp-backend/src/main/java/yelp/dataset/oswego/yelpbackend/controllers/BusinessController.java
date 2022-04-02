@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,23 +26,34 @@ public class BusinessController {
     private BusinessRepository repo; // repo to store data
 
     @GetMapping("/get-all-businesses")
-    public List<BusinessModel> getAllBusinesses() {
-        return repo.findAll();
+    public ResponseEntity<List<BusinessModel>> getAllBusinesses() {
+        List<BusinessModel> allBusinesses = repo.findAll();
+        if (allBusinesses == null) 
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        
+        return new ResponseEntity<>(allBusinesses, HttpStatus.OK);
     }
 
     @GetMapping("/{businessName}")
-    public List<BusinessModel> getBusinessByName(@PathVariable String businessName) {
-        return repo.findByName(businessName);
+    public ResponseEntity<List<BusinessModel>> getBusinessByName(@PathVariable String businessName) {
+        List<BusinessModel> business = repo.findByName(businessName);
+        if (business == null) 
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        return new ResponseEntity<>(business, HttpStatus.OK);
     }
 
     @GetMapping("/similar/{businessName}")
-    public List<BusinessModel> getSimilarBusinesses(@PathVariable String businessName) {
+    public ResponseEntity<List<BusinessModel>> getSimilarBusinesses(@PathVariable String businessName) {
         List<BusinessModel> allBusinesses = repo.findAll();
-        BusinessModel targetB = repo.findByName(businessName).get(0);
-    
-        List<BusinessModel> similarBusinesses = new RestService().getSimilarBusinesses(allBusinesses, targetB);
+        if (allBusinesses == null) 
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
-        return similarBusinesses;
+        BusinessModel targetB = repo.findByName(businessName).get(0);
+        List<BusinessModel> similarBusinesses = new RestService().getSimilarBusinesses(allBusinesses, targetB);
+
+        return  new ResponseEntity<>(similarBusinesses, HttpStatus.OK);
     }
 
 

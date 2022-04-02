@@ -7,14 +7,21 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 public class RestService {
     
+    /**
+     * A function to get the similar businesses to the target business
+     * @param allBusinesses
+     * @param targetB
+     * @return a list of similar businesses
+     */
     public List<BusinessModel> getSimilarBusinesses(List<BusinessModel> allBusinesses , BusinessModel targetB) {
-        CosSim cosSim = new CosSim();
         List<BusinessModel> similarBusinesses = new ArrayList<BusinessModel>();
-        for (BusinessModel b : allBusinesses) {
-            double cosSimRate = cosSim.calcSimRate(targetB.getCategories(), b.getCategories());
-            b.setSimilarityRate(cosSimRate);  
-                if (b.getSimilarityRate() >= 0.55 && b.getSimilarityRate() <= 1) {
-                           similarBusinesses.add(b);
+        CosSim cosSim = new CosSim();
+
+        for (BusinessModel business : allBusinesses) {
+            double cosSimRate = cosSim.calcSimRate(targetB.getCategories(), business.getCategories());
+            business.setSimilarityRate(cosSimRate);  
+                if (business.getSimilarityRate() >= 0.75 && business.getSimilarityRate() <= 1) {
+                           similarBusinesses.add(business);
                 }
         }
 
