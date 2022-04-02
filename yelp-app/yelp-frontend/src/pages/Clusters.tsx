@@ -1,18 +1,18 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import { IBusinessCluster } from '../types/interfaces';
 
 const Clusters = () => {
-  let clusterList: IBusinessCluster[] = [];
-  const [clusters, setClusters] = useState<any>();
+  let clusters = new Map();
+  let centroid: string[] = [];
 
   const fetchClusters = async () => {
     const clusterResponse = await axios.get(
       'http://localhost:8080/yelpdata/fetch-random-clusters'
     );
-
-    setClusters(clusterResponse.data);
+    for (const [key, value] of Object.entries(clusterResponse.data)) {
+      clusters.set(key, value);
+      centroid.push(key);
+    }
   };
 
   return (
@@ -30,15 +30,6 @@ const Clusters = () => {
               Fetch Clusters
             </button>
           </div>
-          {clusters == null ? (
-            <div></div>
-          ) : (
-            <div>
-              {clusters?.map((map: any) => {
-                console.log('heckyeah');
-              })}
-            </div>
-          )}
         </div>
       </div>
     </div>

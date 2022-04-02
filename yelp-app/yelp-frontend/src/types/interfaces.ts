@@ -9,16 +9,10 @@ export interface IBusiness {
   categories: Array<String>;
 }
 
-export interface ICentroid {
-  id: number;
-  businessName: string;
-  categories: Array<String>;
-}
-
 export interface IBusinessList {
   bList: Array<IBusiness>;
 }
 
 export interface IBusinessCluster {
-  centroid: Array<IBusiness>;
+  [centroid: string]: any;
 }
