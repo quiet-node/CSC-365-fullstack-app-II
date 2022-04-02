@@ -79,7 +79,7 @@ const YelpData = () => {
         <div className=' w-full mb-8'>
           <Header />
         </div>
-        <div className='flex justify-center items-center w-full h-36 '>
+        <div className='flex justify-center items-center w-full'>
           <div className='bg-white h-36 flex justify-center items-center w-[750px] rounded-lg drop-shadow-2xl'>
             <form onSubmit={getSimilarBs} className=' flex ml-20 items-center'>
               <SearchIcon className='absolute mx-2 text-slate-400' />
@@ -93,7 +93,7 @@ const YelpData = () => {
               />
               <button
                 type='submit'
-                className='cursor-pointer bg-indigo-500 px-10 ml-5 shadow-2xl hover:drop-shadow-lg rounded-full py-2 font-bold text-white hover:bg-indigo-600 '
+                className='cursor-pointer bg-indigo-500 px-10 ml-5 shadow-2xl hover:drop-shadow-lg rounded-xl py-2 font-bold text-white hover:bg-indigo-600 '
               >
                 Find
               </button>
