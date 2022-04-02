@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="yelp")
-public class BusinessModel implements Serializable {
+public class BusinessModel implements Comparable<BusinessModel>, Serializable {
     @Id
     private long id;
     private String  business_id, name, address;
@@ -27,6 +27,7 @@ public class BusinessModel implements Serializable {
         this.id = id;
     }
 
+    @Override
     public int compareTo(BusinessModel b) {
         return Double.compare(this.getSimilarityRate(), b.similarityRate);
     }

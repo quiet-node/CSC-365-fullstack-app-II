@@ -36,22 +36,23 @@ public class BusinessController {
     public List<BusinessModel> getSimilarBusinesses(@PathVariable String businessName) {
         CosSim cosSim = new CosSim();
 
-        List<BusinessModel> allBs = repo.findAll();
+        List<BusinessModel> allBusinesses = repo.findAll();
 
-        List<BusinessModel> similarBs = new ArrayList<BusinessModel>();
+        List<BusinessModel> similarBusinesses = new ArrayList<BusinessModel>();
 
         BusinessModel targetB = repo.findByName(businessName).get(0);
 
-        for (BusinessModel b : allBs) {
+        for (BusinessModel b : allBusinesses) {
             double cosSimRate = cosSim.calcSimRate(targetB.getCategories(), b.getCategories());
             b.setSimilarityRate(cosSimRate);  
                 if (b.getSimilarityRate() >= 0.55 && b.getSimilarityRate() <= 1) {
-                           similarBs.add(b);
+                           similarBusinesses.add(b);
                 }
         }
-        Collections.sort(similarBs, Collections.reverseOrder());
+
+        Collections.sort(similarBusinesses, Collections.reverseOrder());
         
-        return similarBs;
+        return similarBusinesses;
     }
 
 
