@@ -1,12 +1,17 @@
-import YelpData from './components/YelpData';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Clusters from './pages/Clusters';
+import Landing from './pages/Landing';
+import YelpData from './pages/YelpData';
 
 function App() {
   return (
-    <div className='min-h-screen'>
-      <div className='flex items-center justify-center'>
-        <YelpData />
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Landing />} />
+        <Route path='/yelp-data' element={<YelpData />} />
+        <Route path='/clusters' element={<Clusters />} />
+      </Routes>
+    </Router>
   );
 }
 
