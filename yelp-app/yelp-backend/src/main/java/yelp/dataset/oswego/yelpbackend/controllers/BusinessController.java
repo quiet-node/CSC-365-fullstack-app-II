@@ -61,6 +61,7 @@ public class BusinessController {
     @GetMapping("/fetch-random-clusters")
     public ResponseEntity<Map<Centroid, List<BusinessModel>>> fetchRandomCluster() throws IOException {
         Map<Centroid, List<BusinessModel>> clusters = new RestService().fetchClusters();
+        
         return new ResponseEntity<>(clusters, HttpStatus.OK);
     }
 

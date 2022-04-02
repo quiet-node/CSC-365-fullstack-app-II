@@ -39,6 +39,8 @@ const YelpData = () => {
           `http://localhost:8080/yelpdata/${businessName}`
         );
 
+        console.log(similarBusinesses.data);
+
         await similarBusinesses.data.map((data: any) => {
           similarBs.push(data);
         });
