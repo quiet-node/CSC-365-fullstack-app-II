@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchIcon from '@material-ui/icons/Search';
-import Header from './Header';
+import Header from '../components/Header';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { IBusiness, IBusinessList } from '../types/interfaces';
-import Loader from './Loader';
+import Loader from '../components/Loader';
 import Alert from '@material-ui/lab/Alert';
 
 const YelpData = () => {
@@ -74,7 +74,7 @@ const YelpData = () => {
   }, []);
 
   return (
-    <div className=' bg-slate-200 min-h-screen max-h-screen w-full flex justify-center'>
+    <div className=' bg-slate-200 min-h-screen max-h-scree'>
       <div className='flex w-full justify-center flex-col items-center'>
         <div className=' w-full mb-8'>
           <Header />
@@ -171,7 +171,7 @@ const YelpData = () => {
             </div>
           ) : (
             <div className=' mt-24'>
-              <Alert severity='error'> No such business </Alert>
+              <Alert severity='error'> Business not found </Alert>
             </div>
           )}
         </div>
