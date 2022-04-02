@@ -69,7 +69,7 @@ public class KMeans {
     /**
      * A function to assign records to clusters based on centroids. 
      * Only records with simRate > 75% will pass.
-     * Each clusters will have max 35 records
+     * Each clusters will have max 25 records
      * @param clusters
      * @param record
      * @param centroid
@@ -79,10 +79,11 @@ public class KMeans {
         if (records == null) {
             records = new ArrayList<>();
         }
-        if (records.size() < 35) {
+        if (records.size() < 25) {
             if (record.getSimilarityRate() > 0.75) {
                 records.add(record);
             }
+            Collections.sort(records, Collections.reverseOrder());
             clusters.put(centroid, records);
         }
     }
