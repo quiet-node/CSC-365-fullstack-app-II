@@ -1,8 +1,6 @@
 package yelp.dataset.oswego.yelpbackend.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import yelp.dataset.oswego.yelpbackend.algorithms.clustering.Centroid;
-import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 import yelp.dataset.oswego.yelpbackend.services.RestService;
@@ -59,8 +56,8 @@ public class BusinessController {
     }
 
     @GetMapping("/fetch-random-clusters")
-    public ResponseEntity<Map<Centroid, List<BusinessModel>>> fetchRandomCluster() throws IOException {
-        Map<Centroid, List<BusinessModel>> clusters = new RestService().fetchClusters();
+    public ResponseEntity<Map<String, List<BusinessModel>>> fetchRandomCluster() throws IOException {
+        Map<String, List<BusinessModel>> clusters = new RestService().fetchClusters();
         
         return new ResponseEntity<>(clusters, HttpStatus.OK);
     }

@@ -42,10 +42,10 @@ public class RestService {
      * @return clusters
      * @throws IOException
      */
-    public Map<Centroid, List<BusinessModel>> fetchClusters() throws IOException {
+    public Map<String, List<BusinessModel>> fetchClusters() throws IOException {
         BusinessBtree businessBtree = new IOService().readBtree();
         
-        Map<Centroid, List<BusinessModel>> clusters = new KMeans().initializeClusers(businessBtree, new Random().nextInt(10)+5);
+        Map<String, List<BusinessModel>> clusters = new KMeans().initializeClusers(businessBtree, new Random().nextInt(10)+5);
         if (clusters == null) 
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 

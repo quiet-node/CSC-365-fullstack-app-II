@@ -9,26 +9,6 @@ import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 public class KMeans {
 
     /**
-     * A function to initialize clusters.
-     * Reference: https://www.baeldung.com/java-k-means-clustering-algorithm
-     * @param businessBtree 
-     * @param k number of clusters
-     * @return clusters
-     */
-    public Map<Centroid, List<BusinessModel>> initializeClusers(BusinessBtree businessBtree, int k) {
-        Map<Centroid, List<BusinessModel>> clusters = new HashMap<>();
-        List<Centroid> centroids = generateRandomCentroids(businessBtree, k);
-        List<BusinessModel> records = businessBtree.findAll();
-
-        for (BusinessModel record : records) {
-                Centroid centroid = nearestCentroid(record, centroids);
-                assignToCluster(clusters, record, centroid);
-        }
-
-        return clusters;
-    }
-
-    /**
      * A function to generate centroids randomly
      * @param businessBtree
      * @param k
@@ -74,8 +54,8 @@ public class KMeans {
      * @param record
      * @param centroid
      */
-    private void assignToCluster(Map<Centroid, List<BusinessModel>> clusters, BusinessModel record, Centroid centroid) {
-        List<BusinessModel> records = clusters.get(centroid);
+    private void assignToCluster(Map<String, List<BusinessModel>> clusters, BusinessModel record, Centroid centroid) {
+        List<BusinessModel> records = clusters.get(centroid.getBusinessName());
         if (records == null) {
             records = new ArrayList<>();
         }
@@ -84,8 +64,28 @@ public class KMeans {
                 records.add(record);
             }
             Collections.sort(records, Collections.reverseOrder());
-            clusters.put(centroid, records);
+            clusters.put(centroid.getBusinessName(), records);
         }
+    }
+
+    /**
+     * A function to initialize clusters.
+     * Reference: https://www.baeldung.com/java-k-means-clustering-algorithm
+     * @param businessBtree 
+     * @param k number of clusters
+     * @return clusters
+     */
+    public Map<String, List<BusinessModel>> initializeClusers(BusinessBtree businessBtree, int k) {
+        Map<String, List<BusinessModel>> clusters = new HashMap<>();
+        List<Centroid> centroids = generateRandomCentroids(businessBtree, k);
+        List<BusinessModel> records = businessBtree.findAll();
+
+        for (BusinessModel record : records) {
+                Centroid centroid = nearestCentroid(record, centroids);
+                assignToCluster(clusters, record, centroid);
+        }
+
+        return clusters;
     }
 
 }
