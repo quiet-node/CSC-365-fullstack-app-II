@@ -47,8 +47,8 @@ const YelpData = () => {
 
         setAllBList(similarBs);
         setSimilarBList(similarBs);
-        similarBs = [];
 
+        similarBs = [];
         setBusinessName('');
         setIsLoading(false);
         setIsReady(true);
