@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import yelp.dataset.oswego.yelpbackend.algorithms.clustering.Centroid;
+import yelp.dataset.oswego.yelpbackend.models.BusinessD3RootModel;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 import yelp.dataset.oswego.yelpbackend.services.RestService;
@@ -62,5 +63,10 @@ public class BusinessController {
         return new ResponseEntity<>(clusters, HttpStatus.OK);
     }
 
+    @GetMapping("/fetch-d3-clusters")
+    public ResponseEntity<BusinessD3RootModel> prepareD3() throws IOException {
+        BusinessD3RootModel d3root = new RestService().prepareD3();
+        return new ResponseEntity<>(d3root, HttpStatus.OK);
+    }
     
 }
