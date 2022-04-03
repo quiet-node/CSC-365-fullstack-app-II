@@ -1,9 +1,6 @@
 package yelp.dataset.oswego.yelpbackend.algorithms.clustering;
 
-import java.text.DecimalFormat;
 import java.util.*;
-
-import org.json.JSONObject;
 
 import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
@@ -55,7 +52,7 @@ public class KMeans {
     /**
      * A function to assign records to clusters based on centroids. 
      * Only records with simRate > 75% will pass.
-     * Each clusters will have max 25 records
+     * Each clusters will have max 20 records
      * @param clusters
      * @param record
      * @param centroid
@@ -65,7 +62,7 @@ public class KMeans {
         if (records == null) {
             records = new ArrayList<>();
         }
-        if (records.size() < 25) {
+        if (records.size() < 20) {
             if (record.getSimilarityRate() > 0.75) {
                 records.add(record);
             }
