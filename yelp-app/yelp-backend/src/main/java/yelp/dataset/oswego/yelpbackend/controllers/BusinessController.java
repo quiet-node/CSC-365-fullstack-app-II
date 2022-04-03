@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import yelp.dataset.oswego.yelpbackend.algorithms.clustering.Centroid;
 import yelp.dataset.oswego.yelpbackend.models.BusinessD3RootModel;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;

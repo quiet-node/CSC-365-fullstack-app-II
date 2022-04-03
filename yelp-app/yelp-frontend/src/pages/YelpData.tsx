@@ -76,7 +76,7 @@ const YelpData = () => {
   }, []);
 
   return (
-    <div className=' bg-slate-200 min-h-screen max-h-scree'>
+    <div className=' bg-slate-200 min-h-screen max-h-screen'>
       <div className='flex w-full justify-center flex-col items-center'>
         <div className=' w-full mb-8'>
           <Header />

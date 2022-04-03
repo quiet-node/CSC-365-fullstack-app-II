@@ -52,7 +52,7 @@ public class KMeans {
     /**
      * A function to assign records to clusters based on centroids. 
      * Only records with simRate > 75% will pass.
-     * Each clusters will have max 20 records
+     * Each clusters will have max 10 records
      * @param clusters
      * @param record
      * @param centroid
@@ -62,7 +62,7 @@ public class KMeans {
         if (records == null) {
             records = new ArrayList<>();
         }
-        if (records.size() < 20) {
+        if (records.size() < 10) {
             if (record.getSimilarityRate() > 0.75) {
                 records.add(record);
             }
@@ -119,7 +119,7 @@ public class KMeans {
                 for (BusinessModel business : clusters.get(centroid)) {
                     BusinessD3Model d3Model = new BusinessD3Model();
                     double scale = Math.pow(10, 2);
-                    d3Model.setName(business.getName());
+                    d3Model.setName(business.getName() + " --- " +(Double.toString(Math.round(business.getSimilarityRate()*100*scale) / scale) + "%"));
                     d3Model.setValue((Double.toString(Math.round(business.getSimilarityRate()*100*scale) / scale) + "%")) ;
                     d3models.add(d3Model);
                 }

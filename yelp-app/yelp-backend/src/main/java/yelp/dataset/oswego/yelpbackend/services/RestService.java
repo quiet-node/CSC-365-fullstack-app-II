@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.*;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
-import yelp.dataset.oswego.yelpbackend.algorithms.clustering.Centroid;
 import yelp.dataset.oswego.yelpbackend.algorithms.clustering.KMeans;
 import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;

@@ -15,13 +15,13 @@ const Landing = () => {
                 to='/yelp-data'
                 className='cursor-pointer bg-indigo-500 px-10 ml-5 shadow-2xl hover:drop-shadow-lg rounded-lg py-2 font-bold text-white hover:bg-indigo-600 '
               >
-                Yelp Data
+                Look up a business
               </Link>
               <Link
                 to='/clusters'
                 className='cursor-pointer bg-indigo-500 px-10 ml-5 shadow-2xl hover:drop-shadow-lg rounded-lg py-2 font-bold text-white hover:bg-indigo-600 '
               >
-                Clusters
+                Fetch random clusters
               </Link>
             </div>
           </div>
