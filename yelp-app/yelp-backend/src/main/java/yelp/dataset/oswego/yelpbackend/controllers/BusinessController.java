@@ -58,15 +58,12 @@ public class BusinessController {
 
     @GetMapping("/fetch-random-clusters")
     public ResponseEntity<Map<String, List<BusinessModel>>> fetchRandomCluster() throws IOException {
-        Map<String, List<BusinessModel>> clusters = new RestService().fetchClusters();
-        
-        return new ResponseEntity<>(clusters, HttpStatus.OK);
+        return new ResponseEntity<>(new RestService().fetchClusters(), HttpStatus.OK);
     }
 
     @GetMapping("/fetch-d3-clusters")
     public ResponseEntity<BusinessD3RootModel> prepareD3() throws IOException {
-        BusinessD3RootModel d3root = new RestService().prepareD3();
-        return new ResponseEntity<>(d3root, HttpStatus.OK);
+        return new ResponseEntity<>(new RestService().prepareD3(), HttpStatus.OK);
     }
     
 }

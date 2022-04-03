@@ -1,18 +1,21 @@
 import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
+import { select } from 'd3';
 
 const Clusters = () => {
-  let clusters = new Map();
-  let centroid: string[] = [];
+  const [d3data, setD3data] = useState<any>();
+  const svgRef = useRef(null);
+  const width = document.body.clientWidth;
+  const height = document.body.clientHeight;
 
-  const fetchClusters = async () => {
-    const clusterResponse = await axios.get(
-      'http://localhost:8080/yelpdata/fetch-random-clusters'
+  const fetchD3 = async () => {
+    const res = await axios.get(
+      'http://localhost:8080/yelpdata/fetch-d3-clusters'
     );
-    for (const [key, value] of Object.entries(clusterResponse.data)) {
-      clusters.set(key, value);
-      centroid.push(key);
-    }
+    setD3data(res.data);
+  };
+
   };
 
   return (
@@ -24,7 +27,7 @@ const Clusters = () => {
         <div className='flex justify-center items-center w-full'>
           <div className='bg-white h-24 flex justify-center items-center w-[750px] rounded-lg drop-shadow-2xl'>
             <button
-              onClick={fetchClusters}
+              onClick={buildRadialTidyTree}
               className='cursor-pointer bg-indigo-500 px-10 ml-5 shadow-2xl hover:drop-shadow-lg rounded-xl py-2 font-bold text-white hover:bg-indigo-600 '
             >
               Fetch Clusters

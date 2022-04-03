@@ -12,7 +12,3 @@ export interface IBusiness {
 export interface IBusinessList {
   bList: Array<IBusiness>;
 }
-
-export interface IBusinessCluster {
-  [centroid: string]: any;
-}
