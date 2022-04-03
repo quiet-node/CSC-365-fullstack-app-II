@@ -11,6 +11,7 @@ import yelp.dataset.oswego.yelpbackend.algorithms.clustering.Centroid;
 import yelp.dataset.oswego.yelpbackend.algorithms.clustering.KMeans;
 import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
 import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
+import yelp.dataset.oswego.yelpbackend.models.BusinessD3RootModel;
 import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
 
 public class RestService {
@@ -50,5 +51,20 @@ public class RestService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 
         return clusters;
+    }
+
+    /**
+     * A function to 
+     * @return root JSON structure for D3
+     * @throws IOException
+     */
+    public BusinessD3RootModel prepareD3() throws IOException {
+        BusinessBtree businessBtree = new IOService().readBtree();
+
+        BusinessD3RootModel d3Root = new KMeans().prepareD3(businessBtree, new Random().nextInt(10)+5);
+        if (d3Root == null)
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return d3Root;
     }
 }
