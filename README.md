@@ -9,6 +9,10 @@
   - This new extended version allow users to fetch 5-10 clusters randomly from the Spring Boot server. It then feed the clusters to React+D3.js (Data-driven document) in the FE to form up a hierarchical tree 
   
 
+## Project Showcase
+https://user-images.githubusercontent.com/66233296/161447005-ec8382ae-827d-4b8d-a350-f8e0dae2cf9c.mov
+
+
 
 ## Technologies:
 ### Backend -- Engine
