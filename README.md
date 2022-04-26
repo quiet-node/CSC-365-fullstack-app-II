@@ -2,11 +2,13 @@
 
 
 ## Overview
-  - This project is the extention of the [CSC-365-fullstack-app](https://github.com/lgad31vn/CSC-365-fullstack-app).
+  - This project is the extention of the [CSC-365-fullstack-app 1.0](https://github.com/lgad31vn/CSC-365-fullstack-app).
+
+  - Visit the newest extended version here at [CSC-365-fullstack-app 3.0](https://github.com/lgad31vn/CSC-365-fullstack-app-III)
   
-  - This is a full-stack web application that works like a *search engine* which will find the similar and relevant businesses (in a json dataset from Yelp) based on user's inputs using Cosine Similarity Metric. 
+  - Version 1.0 is a full-stack web application that works like a *search engine* which will find the similar and relevant businesses (in a json dataset from Yelp) based on user's inputs using Cosine Similarity Metric. 
   
-  - This new extended version allow users to fetch 5-10 clusters randomly from the Spring Boot server. It then feed the clusters to React+D3.js (Data-driven document) in the FE to form up a hierarchical tree 
+  - This new extended version will, on top of the features in version 1.0, allows users to fetch 5-10 clusters randomly from the Spring Boot server. It then feed the clusters to React+D3.js (Data-driven document) in the FE to form up a hierarchical tree 
   
 
 ## Project Showcase
