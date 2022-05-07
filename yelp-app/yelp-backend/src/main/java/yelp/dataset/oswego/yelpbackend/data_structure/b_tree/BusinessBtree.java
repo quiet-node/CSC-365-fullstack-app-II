@@ -1,10 +1,18 @@
-package yelp.dataset.oswego.yelpbackend.dataStructure.btree;
+package yelp.dataset.oswego.yelpbackend.data_structure.b_tree;
 
 import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
-import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
+import yelp.dataset.oswego.yelpbackend.models.business_models.BusinessModel;
+
+/**
+ * @author: Nam (Logan) Nguyen
+ * @college: SUNY Oswego
+ * @since Spring 2022
+ * @version 2.0
+ * @link: https://github.com/lgad31vn/CSC-365
+ */
 
 /** 
 *   POJO will be wiped off by garbge collector after a running session

@@ -26,7 +26,6 @@ https://user-images.githubusercontent.com/66233296/161447005-ec8382ae-827d-4b8d-
   - Cosine Similarity
   - MySql Database / Docker image
 
-
 ### Frontend -- client
   - Vite/React--TypeScript
   - D3.js (Data-driven document)

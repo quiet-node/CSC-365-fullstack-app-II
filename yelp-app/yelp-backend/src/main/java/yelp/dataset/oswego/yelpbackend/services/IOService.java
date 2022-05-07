@@ -13,7 +13,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import lombok.NoArgsConstructor;
-import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
+import yelp.dataset.oswego.yelpbackend.data_structure.b_tree.BusinessBtree;
+
+/**
+ * @author: Nam (Logan) Nguyen
+ * @college: SUNY Oswego
+ * @since Spring 2022
+ * @version 2.0
+ * @link: https://github.com/lgad31vn/CSC-365
+ */
 
 @NoArgsConstructor
 public class IOService {

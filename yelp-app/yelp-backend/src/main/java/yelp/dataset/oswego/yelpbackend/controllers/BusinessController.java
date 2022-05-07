@@ -13,10 +13,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import yelp.dataset.oswego.yelpbackend.models.BusinessD3RootModel;
-import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
+import yelp.dataset.oswego.yelpbackend.models.business_models.BusinessModel;
+import yelp.dataset.oswego.yelpbackend.models.d3_models.BusinessD3RootModel;
 import yelp.dataset.oswego.yelpbackend.repositories.BusinessRepository;
 import yelp.dataset.oswego.yelpbackend.services.RestService;
+
+/**
+ * @author: Nam (Logan) Nguyen
+ * @college: SUNY Oswego
+ * @since Spring 2022
+ * @version 2.0
+ * @link: https://github.com/lgad31vn/CSC-365
+ */
 
 @RestController
 @RequestMapping("/yelpdata")

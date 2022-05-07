@@ -3,11 +3,19 @@ package yelp.dataset.oswego.yelpbackend.algorithms.clustering;
 import java.util.*;
 
 import yelp.dataset.oswego.yelpbackend.algorithms.similarity.CosSim;
-import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
-import yelp.dataset.oswego.yelpbackend.models.BusinessD3ChildrenModel;
-import yelp.dataset.oswego.yelpbackend.models.BusinessD3Model;
-import yelp.dataset.oswego.yelpbackend.models.BusinessD3RootModel;
-import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
+import yelp.dataset.oswego.yelpbackend.data_structure.b_tree.BusinessBtree;
+import yelp.dataset.oswego.yelpbackend.models.business_models.BusinessModel;
+import yelp.dataset.oswego.yelpbackend.models.d3_models.BusinessD3ChildrenModel;
+import yelp.dataset.oswego.yelpbackend.models.d3_models.BusinessD3Model;
+import yelp.dataset.oswego.yelpbackend.models.d3_models.BusinessD3RootModel;
+
+/**
+ * @author: Nam (Logan) Nguyen
+ * @college: SUNY Oswego
+ * @since Spring 2022
+ * @version 2.0
+ * @link: https://github.com/lgad31vn/CSC-365
+ */
 
 public class KMeans {
 
@@ -128,7 +136,6 @@ public class KMeans {
             d3children.add(d3Child);
         }
         d3root.setChildren(d3children);
-
         return d3root;
     }
 

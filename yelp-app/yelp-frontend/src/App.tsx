@@ -3,6 +3,14 @@ import Clusters from './pages/Clusters';
 import Landing from './pages/Landing';
 import YelpData from './pages/YelpData';
 
+/**
+ * @author: Nam (Logan) Nguyen
+ * @college: SUNY Oswego
+ * @since Spring 2022
+ * @version 2.0
+ * @link: https://github.com/lgad31vn/CSC-365
+ */
+
 function App() {
   return (
     <Router>

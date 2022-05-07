@@ -7,8 +7,16 @@ import java.util.*;
 import org.json.JSONObject;
 
 import lombok.Getter;
-import yelp.dataset.oswego.yelpbackend.dataStructure.btree.BusinessBtree;
-import yelp.dataset.oswego.yelpbackend.models.BusinessModel;
+import yelp.dataset.oswego.yelpbackend.data_structure.b_tree.BusinessBtree;
+import yelp.dataset.oswego.yelpbackend.models.business_models.BusinessModel;
+
+/**
+ * @author: Nam (Logan) Nguyen
+ * @college: SUNY Oswego
+ * @since Spring 2022
+ * @version 2.0
+ * @link: https://github.com/lgad31vn/CSC-365
+ */
 
 @Getter
 public class JsonService {

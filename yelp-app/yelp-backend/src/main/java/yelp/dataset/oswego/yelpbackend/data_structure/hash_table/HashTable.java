@@ -1,7 +1,15 @@
-package yelp.dataset.oswego.yelpbackend.dataStructure.hashTable;
+package yelp.dataset.oswego.yelpbackend.data_structure.hash_table;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+
+/**
+ * @author: Nam (Logan) Nguyen
+ * @college: SUNY Oswego
+ * @since Spring 2022
+ * @version 2.0
+ * @link: https://github.com/lgad31vn/CSC-365
+ */
 
 
 /* 
