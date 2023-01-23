@@ -1,7 +1,6 @@
 # CSC-365 fullstack app 2.0
 
 ## Overview
-
 - This project is the extention of the [CSC-365-fullstack-app 1.0](https://github.com/lgad31vn/CSC-365-fullstack-app).
 
 - Visit the newest extended version here at [CSC-365-fullstack-app 3.0](https://github.com/lgad31vn/CSC-365-fullstack-app-III)
